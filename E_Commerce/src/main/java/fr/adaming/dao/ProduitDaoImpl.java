@@ -1,11 +1,22 @@
+/**
+ * 
+ * @author CLAIN Fabien
+ * Date :27/10/2016
+ * 
+ */
 package fr.adaming.dao;
 
 import java.util.List;
 
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import fr.adaming.model.Categorie;
 import fr.adaming.model.Produit;
+
 @Repository
 public class ProduitDaoImpl implements IProduitDao {
 //----------------------------------------------------------------------------------------------------------------
@@ -13,6 +24,8 @@ public class ProduitDaoImpl implements IProduitDao {
 	/**
 	 * 1_Les propriétés (champs, attributs)
 	 */
+	@Autowired
+	private SessionFactory sf;
 //----------------------------------------------------------------------------------------------------------------
 //---------------------------------2_Les constructeurs------------------------------------------------------------	
 	/**
@@ -23,42 +36,58 @@ public class ProduitDaoImpl implements IProduitDao {
 	/**
 	 * 3_Les Getters et Setters
 	 */
+	/**
+	 * @param sf the sf to set
+	 */
+	public void setSf(SessionFactory sf) {
+		this.sf = sf;
+	}
 //----------------------------------------------------------------------------------------------------------------
 //---------------------------------4_Méthodes---------------------------------------------------------------------
 	/**
 	 * 4_Méthodes
 	 */
 	public void addProduitDao(Produit produit) {
-		// TODO Auto-generated method stub
+		Session s = sf.getCurrentSession();
+		s.save(produit);
 
 	}
 
 	public void deleteProduitDao(long id_produit) {
-		// TODO Auto-generated method stub
-
+		Session s = sf.getCurrentSession();
+		Produit p = (Produit) s.get(Produit.class, id_produit);
+		s.delete(p);
 	}
 
 	public void updateProduitDao(Produit produit) {
-		// TODO Auto-generated method stub
-
+		Session s = sf.getCurrentSession();
+		s.saveOrUpdate(produit);
 	}
 
 	public List<Produit> getAllProduitDao() {
-		// TODO Auto-generated method stub
-		return null;
+		Session s = sf.getCurrentSession();
+		String req = "FROM Produit";
+		Query query = s.createQuery(req);
+		return query.list();
 	}
 
-	public List<Produit> getProduitByCategorieDao(Categorie categorie) {
-		// TODO Auto-generated method stub
+	public List<Produit> getProduitByIdCategorieDao(long id_cat) {
+		Session s = sf.getCurrentSession();
+		String req ="FROM Produit p WHERE p.categorie.id_categorie=:cat_id";
 		return null;
 	}
 
 	public Produit getProduitByIdDao(long id_produit) {
-		// TODO Auto-generated method stub
-		return null;
+		Session s = sf.getCurrentSession();
+		String req ="FROM Produit p WHERE p.id_produit=:produit_id";
+		Query query = s.createQuery(req);
+		
+		query.setParameter("produit_id", id_produit);
+		
+		return (Produit) query.uniqueResult();
 	}
 
-	public long getIdByNomProduitDao(String nomProduit) {
+	public long getIdProduitByNomDao(String nomProduit) {
 		// TODO Auto-generated method stub
 		return 0;
 	}

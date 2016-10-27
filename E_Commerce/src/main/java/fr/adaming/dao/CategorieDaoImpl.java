@@ -54,9 +54,9 @@ public class CategorieDaoImpl implements ICategorieDao {
 		return null;
 	}
 
-	public Categorie getCategorieByProduitDao(Produit produit) {
+	public int getIdCategorieByNomDao(String nom_cat) {
 		// TODO Auto-generated method stub
-		return null;
+		return 0;
 	}
 
 //----------------------------------------------------------------------------------------------------------------

@@ -10,7 +10,6 @@ import java.util.List;
 
 
 import fr.adaming.model.Categorie;
-import fr.adaming.model.Produit;
 
 
 public interface ICategorieDao {
@@ -37,6 +36,6 @@ public interface ICategorieDao {
 	public void deleteCategorieDao(long id_client);
 	public void updateCategorieDao(Categorie categorie);
 	public List<Categorie> getAllCategorieDao();
-	public Categorie getCategorieByProduitDao(Produit produit);
+	public int getIdCategorieByNomDao(String nom_cat);
 //-------------------------------------------------------------------------------------------------------------
 }

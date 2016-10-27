@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import fr.adaming.dao.ICategorieDao;
 import fr.adaming.model.Categorie;
-import fr.adaming.model.Produit;
+
 
 @Service
 @Transactional
@@ -60,8 +60,8 @@ public class CategorieServiceImpl implements ICategorieService{
 		return categorieDao.getAllCategorieDao();
 	}
 
-	public Categorie getCategorieByProduitService(Produit produit) {
-		return categorieDao.getCategorieByProduitDao(produit);
+	public int getIdCategorieByNomService(String nom_cat) {
+		return categorieDao.getIdCategorieByNomDao(nom_cat);
 	}
 //----------------------------------------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------------------

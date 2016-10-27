@@ -37,5 +37,6 @@ public interface IClientDao {
 	public void updateClientDao(Client client);
 	public int isExistDao(String mail, String password);
 	public List<Client> getAllClientDao();
+	public Client getClientByIdDao(long id_client);
 //-------------------------------------------------------------------------------------------------------------
 }

@@ -10,7 +10,6 @@ import java.util.List;
 
 
 import fr.adaming.model.Categorie;
-import fr.adaming.model.Produit;
 
 public interface ICategorieService {
 //------------------------------1_Les propriétés (champs, attributs)-------------------------------------------
@@ -36,7 +35,7 @@ public interface ICategorieService {
 	public void deleteCategorieService(long id_client);
 	public void updateCategorieService(Categorie categorie);
 	public List<Categorie> getAllCategorieService();
-	public Categorie getCategorieByProduitService(Produit produit);
+	public int getIdCategorieByNomService(String nom_cat);
 //-------------------------------------------------------------------------------------------------------------
 
 }
