@@ -16,7 +16,7 @@ import fr.adaming.dao.ICommandeDao;
 import fr.adaming.model.Client;
 import fr.adaming.model.Commande;
 
-@Service
+@Service("CommandeServiceBean")
 @Transactional
 public class CommandeServiceImpl implements ICommandeService{
 //----------------------------------------------------------------------------------------------------------------

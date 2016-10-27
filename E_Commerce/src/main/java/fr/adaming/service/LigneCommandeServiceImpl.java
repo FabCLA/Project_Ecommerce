@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import fr.adaming.dao.ILigneCommandeDao;
 import fr.adaming.model.LigneCommande;
 
-@Service
+@Service("ligneCommandeBean")
 @Transactional
 public class LigneCommandeServiceImpl implements ILigneCommandeService{
 //----------------------------------------------------------------------------------------------------------------

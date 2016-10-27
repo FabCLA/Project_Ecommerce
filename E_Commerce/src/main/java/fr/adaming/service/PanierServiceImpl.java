@@ -16,7 +16,7 @@ import fr.adaming.dao.IPanierDao;
 import fr.adaming.model.Client;
 import fr.adaming.model.Panier;
 
-@Service
+@Service("PanierServiceBean")
 @Transactional
 public class PanierServiceImpl implements IPanierService{
 //----------------------------------------------------------------------------------------------------------------

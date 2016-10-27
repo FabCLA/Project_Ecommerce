@@ -6,6 +6,9 @@
  */
 package fr.adaming.dao;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import fr.adaming.model.LigneCommande;
@@ -16,6 +19,8 @@ public class LigneCommandeDaoImpl implements ILigneCommandeDao {
 	/**
 	 * 1_Les propriétés (champs, attributs)
 	 */
+	@Autowired
+	private SessionFactory sf;
 //----------------------------------------------------------------------------------------------------------------
 //---------------------------------2_Les constructeurs------------------------------------------------------------	
 	/**
@@ -26,23 +31,31 @@ public class LigneCommandeDaoImpl implements ILigneCommandeDao {
 	/**
 	 * 3_Les Getters et Setters
 	 */
+	/**
+	 * @param sf the sf to set
+	 */
+	public void setSf(SessionFactory sf) {
+		this.sf = sf;
+	}
 //----------------------------------------------------------------------------------------------------------------
 //---------------------------------4_Méthodes---------------------------------------------------------------------
 	/**
 	 * 4_Méthodes
 	 */
 	public void addLigneCDao(LigneCommande LigneC) {
-		// TODO Auto-generated method stub
-
+		Session s = sf.getCurrentSession();
+		s.save(LigneC);
 	}
 
 	public void deleteLigneCDao(long id_LigneC) {
-		// TODO Auto-generated method stub
-
+		Session s = sf.getCurrentSession();
+		LigneCommande ligneC = (LigneCommande) s.get(LigneCommande.class, id_LigneC);
+		s.delete(ligneC);
 	}
 
 	public void updateLigneCDao(LigneCommande LigneC) {
-		// TODO Auto-generated method stub
+		Session s = sf.getCurrentSession();
+		s.saveOrUpdate(LigneC);
 
 	}
 //----------------------------------------------------------------------------------------------------------------

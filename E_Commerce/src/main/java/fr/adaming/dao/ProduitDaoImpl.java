@@ -14,7 +14,6 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import fr.adaming.model.Categorie;
 import fr.adaming.model.Produit;
 
 @Repository
@@ -75,7 +74,11 @@ public class ProduitDaoImpl implements IProduitDao {
 	public List<Produit> getProduitByIdCategorieDao(long id_cat) {
 		Session s = sf.getCurrentSession();
 		String req ="FROM Produit p WHERE p.categorie.id_categorie=:cat_id";
-		return null;
+		Query query =s.createQuery(req);
+		
+		query.setParameter("cat_id", id_cat);
+		
+		return query.list();
 	}
 
 	public Produit getProduitByIdDao(long id_produit) {
@@ -89,7 +92,11 @@ public class ProduitDaoImpl implements IProduitDao {
 	}
 
 	public long getIdProduitByNomDao(String nomProduit) {
-		// TODO Auto-generated method stub
+//		Session s = sf.getCurrentSession();
+//		String req="SELECT id_produit FROM produit WHERE nom=?";
+//		Query query = s.createSQLQuery(req);
+//		query.setParameter(1, nomProduit);
+//		return (long) query.uniqueResult();
 		return 0;
 	}
 //----------------------------------------------------------------------------------------------------------------
