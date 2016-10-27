@@ -35,7 +35,7 @@ public class Panier implements Serializable{
 		@GeneratedValue(strategy=GenerationType.IDENTITY)
 		private long id_panier;
 		
-		private Double prixTotal;
+		private double prixTotal;
 		
 		@OneToOne(cascade=CascadeType.PERSIST)
 		@JoinColumn(name="client_id",referencedColumnName="id_client")
@@ -60,7 +60,7 @@ public class Panier implements Serializable{
 		/**
 		 * @param prixTotal
 		 */
-		public Panier(Double prixTotal) {
+		public Panier(double prixTotal) {
 			super();
 			this.prixTotal = prixTotal;
 		}
@@ -68,7 +68,7 @@ public class Panier implements Serializable{
 		 * @param id_panier
 		 * @param prixTotal
 		 */
-		public Panier(long id_panier, Double prixTotal) {
+		public Panier(long id_panier, double prixTotal) {
 			super();
 			this.id_panier = id_panier;
 			this.prixTotal = prixTotal;
@@ -93,13 +93,13 @@ public class Panier implements Serializable{
 		/**
 		 * @return the prixTotal
 		 */
-		public Double getPrixTotal() {
+		public double getPrixTotal() {
 			return prixTotal;
 		}
 		/**
 		 * @param prixTotal the prixTotal to set
 		 */
-		public void setPrixTotal(Double prixTotal) {
+		public void setPrixTotal(double prixTotal) {
 			this.prixTotal = prixTotal;
 		}
 		/**
