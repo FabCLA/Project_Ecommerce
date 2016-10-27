@@ -1,12 +1,13 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>Spring</groupId>
-  <artifactId>E_Commerce</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <packaging>war</packaging>
-  <name>E_Commerce</name>
-  
- 
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>Spring</groupId>
+	<artifactId>E_Commerce</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+	<name>E_Commerce</name>
+
+
 	<properties>
 		<spring.version>4.1.9.RELEASE</spring.version>
 		<hibernate.version>4.2.21.Final</hibernate.version>
@@ -141,7 +142,6 @@
 			<scope>runtime</scope>
 		</dependency>
 
-
 		<!-- Spring Security -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>
@@ -166,7 +166,7 @@
 			<artifactId>spring-security-taglibs</artifactId>
 			<version>3.2.0.RELEASE</version>
 		</dependency>
-		
+
 	</dependencies>
 
 
@@ -184,5 +184,5 @@
 		</plugins>
 	</build>
 
-  
+
 </project>
