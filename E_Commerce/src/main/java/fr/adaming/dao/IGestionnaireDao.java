@@ -32,7 +32,7 @@ public interface IGestionnaireDao {
 	/**
 	 * 4_Méthodes
 	 */
-	public List<Gestionnaire> isExist(String login, String mdp);
+	public int isExist(String login, String mdp);
 //----------------------------------------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------------------	
 

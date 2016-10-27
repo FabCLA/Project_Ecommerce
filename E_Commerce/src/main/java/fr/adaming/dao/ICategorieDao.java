@@ -33,7 +33,7 @@ public interface ICategorieDao {
 	 * 4_Méthodes
 	 */
 	public void addCategorieDao(Categorie categorie);
-	public void deleteCategorieDao(long id_client);
+	public void deleteCategorieDao(long id_cat);
 	public void updateCategorieDao(Categorie categorie);
 	public List<Categorie> getAllCategorieDao();
 	public int getIdCategorieByNomDao(String nom_cat);

@@ -6,16 +6,13 @@
  */
 package fr.adaming.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import fr.adaming.dao.IGestionnaireDao;
-import fr.adaming.model.Gestionnaire;
 
-@Service
+@Service("gestionnaireServiceBean")
 @Transactional
 public class GestionnaireServiceImpl implements IGestionnaireService{
 //----------------------------------------------------------------------------------------------------------------
@@ -40,7 +37,7 @@ public class GestionnaireServiceImpl implements IGestionnaireService{
 	/**
 	 * 4_Méthodes
 	 */
-	public List<Gestionnaire> isExistService(String login, String mdp) {
+	public int isExistService(String login, String mdp) {
 		return gestDao.isExist(login, mdp);
 	}
 //----------------------------------------------------------------------------------------------------------------

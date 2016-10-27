@@ -16,7 +16,7 @@ import fr.adaming.dao.ICategorieDao;
 import fr.adaming.model.Categorie;
 
 
-@Service
+@Service("categorieServiceBean")
 @Transactional
 public class CategorieServiceImpl implements ICategorieService{
 //----------------------------------------------------------------------------------------------------------------
@@ -46,8 +46,8 @@ public class CategorieServiceImpl implements ICategorieService{
 		
 	}
 
-	public void deleteCategorieService(long id_client) {
-		categorieDao.deleteCategorieDao(id_client);
+	public void deleteCategorieService(long id_cat) {
+		categorieDao.deleteCategorieDao(id_cat);
 		
 	}
 

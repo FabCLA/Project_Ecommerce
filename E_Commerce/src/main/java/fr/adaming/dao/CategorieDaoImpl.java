@@ -8,9 +8,14 @@ package fr.adaming.dao;
 
 import java.util.List;
 
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import fr.adaming.model.Categorie;
+import fr.adaming.model.Client;
 import fr.adaming.model.Produit;
 @Repository
 public class CategorieDaoImpl implements ICategorieDao {
@@ -19,6 +24,8 @@ public class CategorieDaoImpl implements ICategorieDao {
 	/**
 	 * 1_Les propriétés (champs, attributs)
 	 */
+	@Autowired
+	private SessionFactory sf;
 //----------------------------------------------------------------------------------------------------------------
 //---------------------------------2_Les constructeurs------------------------------------------------------------	
 	/**
@@ -29,29 +36,39 @@ public class CategorieDaoImpl implements ICategorieDao {
 	/**
 	 * 3_Les Getters et Setters
 	 */
+	public void setSf(SessionFactory sf) {
+		this.sf = sf;
+	}
 //----------------------------------------------------------------------------------------------------------------
 //---------------------------------4_Méthodes---------------------------------------------------------------------
 	/**
 	 * 4_Méthodes
 	 */
 	public void addCategorieDao(Categorie categorie) {
-		// TODO Auto-generated method stub
+		Session s = sf.getCurrentSession();
+		s.save(categorie);
 
 	}
 
-	public void deleteCategorieDao(long id_client) {
-		// TODO Auto-generated method stub
+	public void deleteCategorieDao(long id_cat) {
+		Session s = sf.getCurrentSession();
+		Categorie cat = (Categorie) s.get(Categorie.class, id_cat);
+		s.delete(cat);
 
 	}
 
 	public void updateCategorieDao(Categorie categorie) {
-		// TODO Auto-generated method stub
+		Session s = sf.getCurrentSession();
+		s.saveOrUpdate(categorie);
 
 	}
 
 	public List<Categorie> getAllCategorieDao() {
-		// TODO Auto-generated method stub
-		return null;
+		Session s = sf.getCurrentSession();
+		String req = "FROM Categorie";
+		Query query =s.createQuery(req);
+		
+		return query.list();
 	}
 
 	public int getIdCategorieByNomDao(String nom_cat) {
