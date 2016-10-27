@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import fr.adaming.dao.IClientDao;
 import fr.adaming.model.Client;
 
-@Service
+@Service("clientServiceBean")
 @Transactional
 public class ClientServiceImpl implements IClientService{
 //----------------------------------------------------------------------------------------------------------------
