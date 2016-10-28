@@ -36,6 +36,6 @@ public interface ICategorieDao {
 	public void deleteCategorieDao(long id_cat);
 	public void updateCategorieDao(Categorie categorie);
 	public List<Categorie> getAllCategorieDao();
-	public int getIdCategorieByNomDao(String nom_cat);
+	public Categorie getCategorieByNomDao(String nom_cat);
 //-------------------------------------------------------------------------------------------------------------
 }

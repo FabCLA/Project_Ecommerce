@@ -9,6 +9,7 @@ package fr.adaming.model;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -36,11 +37,11 @@ public class Produit implements Serializable{
 		
 		private String nom;
 		private String description;
-		private Double prix;
+		private double prix;
 		private int quantite;
 		private boolean selection;
 		
-		@ManyToOne
+		@ManyToOne(cascade=CascadeType.ALL)
 		@JoinColumn(name="categorie_id", referencedColumnName="id_categorie")
 		private Categorie categorie;
 		
@@ -64,7 +65,7 @@ public class Produit implements Serializable{
 		 * @param quantite
 		 * @param selection
 		 */
-		public Produit(String nom, String description, Double prix, int quantite, boolean selection) {
+		public Produit(String nom, String description, double prix, int quantite, boolean selection) {
 			super();
 			this.nom = nom;
 			this.description = description;
@@ -80,7 +81,7 @@ public class Produit implements Serializable{
 		 * @param quantite
 		 * @param selection
 		 */
-		public Produit(long id_produit, String nom, String description, Double prix, int quantite, boolean selection) {
+		public Produit(long id_produit, String nom, String description, double prix, int quantite, boolean selection) {
 			super();
 			this.id_produit = id_produit;
 			this.nom = nom;
@@ -133,13 +134,13 @@ public class Produit implements Serializable{
 		/**
 		 * @return the prix
 		 */
-		public Double getPrix() {
+		public double getPrix() {
 			return prix;
 		}
 		/**
 		 * @param prix the prix to set
 		 */
-		public void setPrix(Double prix) {
+		public void setPrix(double prix) {
 			this.prix = prix;
 		}
 		/**

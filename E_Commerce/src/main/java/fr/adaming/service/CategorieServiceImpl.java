@@ -60,8 +60,8 @@ public class CategorieServiceImpl implements ICategorieService{
 		return categorieDao.getAllCategorieDao();
 	}
 
-	public int getIdCategorieByNomService(String nom_cat) {
-		return categorieDao.getIdCategorieByNomDao(nom_cat);
+	public Categorie getCategorieByNomService(String nom_cat) {
+		return categorieDao.getCategorieByNomDao(nom_cat);
 	}
 //----------------------------------------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------------------

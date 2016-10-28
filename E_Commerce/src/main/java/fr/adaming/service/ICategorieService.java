@@ -35,7 +35,7 @@ public interface ICategorieService {
 	public void deleteCategorieService(long id_client);
 	public void updateCategorieService(Categorie categorie);
 	public List<Categorie> getAllCategorieService();
-	public int getIdCategorieByNomService(String nom_cat);
+	public Categorie getCategorieByNomService(String nom_cat);
 //-------------------------------------------------------------------------------------------------------------
 
 }

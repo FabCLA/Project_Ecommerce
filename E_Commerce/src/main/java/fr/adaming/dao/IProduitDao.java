@@ -35,7 +35,7 @@ public interface IProduitDao {
 	public void deleteProduitDao(long id_produit);
 	public void updateProduitDao(Produit produit);
 	public List<Produit> getAllProduitDao();
-	public List<Produit> getProduitByIdCategorieDao(long id_cat);
+	public List<Produit> getProduitByCategorieDao(Categorie categorie);
 	public Produit getProduitByIdDao(long id_produit);
 	public long getIdProduitByNomDao(String nomProduit);
 //-------------------------------------------------------------------------------------------------------------

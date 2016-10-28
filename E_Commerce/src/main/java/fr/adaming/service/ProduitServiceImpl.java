@@ -16,7 +16,7 @@ import fr.adaming.dao.IProduitDao;
 import fr.adaming.model.Categorie;
 import fr.adaming.model.Produit;
 
-@Service
+@Service("produitServiceBean")
 @Transactional
 public class ProduitServiceImpl implements IProduitService{
 //----------------------------------------------------------------------------------------------------------------
@@ -62,7 +62,7 @@ public class ProduitServiceImpl implements IProduitService{
 	}
 
 	public List<Produit> getProduitByCategorieService(Categorie categorie) {
-		return produitDao.getAllProduitDao();
+		return produitDao.getProduitByCategorieDao(categorie);
 	}
 
 	public Produit getProduitByIdService(long id_produit) {

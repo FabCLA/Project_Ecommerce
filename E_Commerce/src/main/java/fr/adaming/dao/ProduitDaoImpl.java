@@ -14,6 +14,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import fr.adaming.model.Categorie;
 import fr.adaming.model.Produit;
 
 @Repository
@@ -71,8 +72,9 @@ public class ProduitDaoImpl implements IProduitDao {
 		return query.list();
 	}
 
-	public List<Produit> getProduitByIdCategorieDao(long id_cat) {
+	public List<Produit> getProduitByCategorieDao(Categorie categorie) {
 		Session s = sf.getCurrentSession();
+		int id_cat =categorie.getId_categorie();
 		String req ="FROM Produit p WHERE p.categorie.id_categorie=:cat_id";
 		Query query =s.createQuery(req);
 		

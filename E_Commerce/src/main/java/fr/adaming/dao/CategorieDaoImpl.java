@@ -71,9 +71,14 @@ public class CategorieDaoImpl implements ICategorieDao {
 		return query.list();
 	}
 
-	public int getIdCategorieByNomDao(String nom_cat) {
-		// TODO Auto-generated method stub
-		return 0;
+	public Categorie getCategorieByNomDao(String nom_cat) {
+		Session s = sf.getCurrentSession();
+		String req = "FROM Categorie WHERE nom=:cat_nom";
+		Query query = s.createQuery(req);
+		
+		query.setParameter("cat_nom", nom_cat);
+		
+		return (Categorie) query.uniqueResult();
 	}
 
 //----------------------------------------------------------------------------------------------------------------
