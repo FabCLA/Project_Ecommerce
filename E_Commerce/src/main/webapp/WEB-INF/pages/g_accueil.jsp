@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -41,31 +43,71 @@ li a:hover:not(.active) {
     background-color: #555;
     color: white;
 }
+
+div{
+	width: 75%;
+    float: right;
+    padding: 15px;
+}
+
+
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+
 </style>
 
 </head>
 <body>
 
+
 <ul>
-  <li><a class="active" href="#home">Produits</a></li>
+  <li><a class="active" href="gestAccueil">Produits</a></li>
   <li><a href="#news">Categorie</a></li>
-  <li><a href="#contact">Contact</a></li>
-  <li><a href="#about">About</a></li>
+  <li><a href="#contact">Client</a></li>
 </ul>
 
-<div style="margin-left:25%;padding:1px 16px;height:1000px;">
-  <h2>Fixed Full-height Side Nav</h2>
-  <h3>Try to scroll this area, and see how the sidenav sticks to the page</h3>
-  <p>Notice that this div element has a left margin of 25%. This is because the side navigation is set to 25% width. If you remove the margin, the sidenav will overlay/sit on top of this div.</p>
-  <p>Also notice that we have set overflow:auto to sidenav. This will add a scrollbar when the sidenav is too long (for example if it has over 50 links inside of it).</p>
-  <p>Some text..</p>
-  <p>Some text..</p>
-  <p>Some text..</p>
-  <p>Some text..</p>
-  <p>Some text..</p>
-  <p>Some text..</p>
-  <p>Some text..</p>
-</div>
+	<div>
+
+		<table>
+			
+			<tr bgcolor="grey" style="color: white">
+				<th>Id</th>
+				<th>Nom</th>
+				<th>Description</th>
+				<th>Prix</th>
+				<th>Quantite</th>
+				<th>Selection</th>
+			</tr>
+
+			<c:forEach var="prod" items="${listeProd}">
+				<tr>
+					<td>${prod.id_produit}</td>
+					<td>${prod.nom}</td>
+					<td>${prod.description}</td>
+					<td>${prod.prix}</td>
+					<td>${prod.quantite}</td>
+					<td>${prod.selection}</td>
+				</tr>
+			</c:forEach>
+			
+		</table>
+
+	</div>
 
 </body>
 </html>

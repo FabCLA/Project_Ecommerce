@@ -21,21 +21,21 @@ public class ClassTestFab {
 		
 	//--------------------------------------------Ajout des catégories---------------------------------------------------------------------
 		//Instanciation des catégories
-//			Categorie cat1 = new Categorie("Ordinateur");
-//			Categorie cat2 = new Categorie("PC Portable");
-//			Categorie cat3 = new Categorie("Tablette");
-//			Categorie cat4 = new Categorie("Smartphone");
-//			Categorie cat5 = new Categorie("Périphérique PC");
+			Categorie cat1 = new Categorie("Ordinateur");
+			Categorie cat2 = new Categorie("PC Portable");
+			Categorie cat3 = new Categorie("Tablette");
+			Categorie cat4 = new Categorie("Smartphone");
+			Categorie cat5 = new Categorie("Périphérique PC");
 			
 		//Récupération du bean CategorieService
 			ICategorieService catService = (ICategorieService) cxt.getBean("categorieServiceBean");
 			
 		//Ajout à la base de donnée
-//			catService.addCategorieService(cat1);
-//			catService.addCategorieService(cat2);
-//			catService.addCategorieService(cat3);
-//			catService.addCategorieService(cat4);
-//			catService.addCategorieService(cat5);
+			catService.addCategorieService(cat1);
+			catService.addCategorieService(cat2);
+			catService.addCategorieService(cat3);
+			catService.addCategorieService(cat4);
+			catService.addCategorieService(cat5);
 			
 	//-------------------------------------------------------------------------------------------------------------------------------------
 	//--------------------------------------------Ajout des produits(test)-----------------------------------------------------------------
@@ -56,11 +56,11 @@ public class ClassTestFab {
 			
 				
 			//Récupérer les catégories de la database
-				Categorie cat1 =catService.getCategorieByNomService("Ordinateur");
-				Categorie cat2 =catService.getCategorieByNomService("PC Portable");
-				Categorie cat3 =catService.getCategorieByNomService("Tablette");
-				Categorie cat4 =catService.getCategorieByNomService("Smartphone");
-				Categorie cat5 =catService.getCategorieByNomService("Périphérique PC");
+//				Categorie cat1 =catService.getCategorieByNomService("Ordinateur");
+//				Categorie cat2 =catService.getCategorieByNomService("PC Portable");
+//				Categorie cat3 =catService.getCategorieByNomService("Tablette");
+//				Categorie cat4 =catService.getCategorieByNomService("Smartphone");
+//				Categorie cat5 =catService.getCategorieByNomService("Périphérique PC");
 				
 			//Ajouter les produits au catégorie
 				p1.setCategorie(cat1);
