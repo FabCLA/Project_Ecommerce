@@ -11,6 +11,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -48,14 +49,25 @@ public class ClientController {
 	 * 4_Méthodes
 	 */
 	@RequestMapping(value="/accueil", method=RequestMethod.GET)
-	public String welcomeEmploye(ModelMap model){
+	public String accueilClient(ModelMap model){
 		//Récupération de la liste des catégories 
 		List<Categorie> listeCat = catService.getAllCategorieService();
 		model.addAttribute("cat_liste", listeCat);
 		
 		//Récupération de la liste des produits
 		List<Produit> listeProd = produitService.getAllProduitService();
-		model.addAttribute("prod_list", listeProd);
+		model.addAttribute("prod_liste", listeProd);
+		return "c_accueil";
+	}
+	
+	@RequestMapping(value="/catProduit/{nomCategorie}", method=RequestMethod.GET)
+	public String produitByCategorie(@PathVariable("nomCategorie") String nomCat, ModelMap model){
+		//Récupération de la catégorie
+		Categorie cat = catService.getCategorieByNomService(nomCat);
+		//récupération de la liste des produits par leur catégorie
+		List<Produit> listeProdByCat = produitService.getProduitByCategorieService(cat);
+		
+		model.addAttribute("prod_liste", listeProdByCat);
 		return "c_accueil";
 	}
 //----------------------------------------------------------------------------------------------------------------
