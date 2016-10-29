@@ -48,8 +48,9 @@ public class ClientController {
 	/**
 	 * 4_Méthodes
 	 */
-	@RequestMapping(value="/accueil", method=RequestMethod.GET)
+	@RequestMapping(value="/accueil", method=RequestMethod.POST)
 	public String accueilClient(ModelMap model){
+		
 		//Récupération de la liste des catégories 
 		List<Categorie> listeCat = catService.getAllCategorieService();
 		model.addAttribute("cat_liste", listeCat);
@@ -57,17 +58,25 @@ public class ClientController {
 		//Récupération de la liste des produits
 		List<Produit> listeProd = produitService.getAllProduitService();
 		model.addAttribute("prod_liste", listeProd);
+		
 		return "c_accueil";
 	}
 	
-	@RequestMapping(value="/catProduit/{nomCategorie}", method=RequestMethod.GET)
+	@RequestMapping(value="/catProduit/{nomCategorie}", method=RequestMethod.POST)
 	public String produitByCategorie(@PathVariable("nomCategorie") String nomCat, ModelMap model){
+		
+		//Récupération de la liste des catégories 
+		List<Categorie> listeCat = catService.getAllCategorieService();
+		model.addAttribute("cat_liste", listeCat);
+		
 		//Récupération de la catégorie
 		Categorie cat = catService.getCategorieByNomService(nomCat);
+		
 		//récupération de la liste des produits par leur catégorie
 		List<Produit> listeProdByCat = produitService.getProduitByCategorieService(cat);
 		
 		model.addAttribute("prod_liste", listeProdByCat);
+		
 		return "c_accueil";
 	}
 //----------------------------------------------------------------------------------------------------------------
