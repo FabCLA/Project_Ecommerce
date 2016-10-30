@@ -1,11 +1,14 @@
 package fr.adaming.test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 
 import fr.adaming.model.Categorie;
+import fr.adaming.model.LigneCommande;
+import fr.adaming.model.Panier;
 import fr.adaming.model.Produit;
 import fr.adaming.service.ICategorieService;
 import fr.adaming.service.IProduitService;
@@ -88,12 +91,13 @@ public class ClassTestFab {
 				
 				List<Produit> liste = produitService.getProduitByCategorieService(cat2);
 				
-				for(Produit p:liste){
-					System.out.println(p);
-				}
+//				for(Produit p:liste){
+//					System.out.println(p);
+//				}
 	//-------------------------------------------------------------------------------------------------------------------------------------		
+			
 				
-				
+	
 				
 				
 	}

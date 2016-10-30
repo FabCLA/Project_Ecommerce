@@ -35,6 +35,8 @@ public class Panier implements Serializable{
 		@GeneratedValue(strategy=GenerationType.IDENTITY)
 		private long id_panier;
 		
+		private int nbArticle;
+		
 		private double prixTotal;
 		
 		@OneToOne(cascade=CascadeType.PERSIST)
@@ -60,18 +62,20 @@ public class Panier implements Serializable{
 		/**
 		 * @param prixTotal
 		 */
-		public Panier(double prixTotal) {
+		public Panier(double prixTotal, int nbArticle) {
 			super();
 			this.prixTotal = prixTotal;
+			this.nbArticle = nbArticle;
 		}
 		/**
 		 * @param id_panier
 		 * @param prixTotal
 		 */
-		public Panier(long id_panier, double prixTotal) {
+		public Panier(long id_panier, double prixTotal, int nbArticle) {
 			super();
 			this.id_panier = id_panier;
 			this.prixTotal = prixTotal;
+			this.nbArticle = nbArticle;
 		}
 //-------------------------------------------------------------------------------------------------------------
 //------------------------------3_Les Getters et Setters-------------------------------------------------------
@@ -138,6 +142,19 @@ public class Panier implements Serializable{
 		public void setCmd(Commande cmd) {
 			this.cmd = cmd;
 		}
+		
+		/**
+		 * @return the nbArticle
+		 */
+		public int getNbArticle() {
+			return nbArticle;
+		}
+		/**
+		 * @param nbArticle the nbArticle to set
+		 */
+		public void setNbArticle(int nbArticle) {
+			this.nbArticle = nbArticle;
+		}
 //-------------------------------------------------------------------------------------------------------------
 //------------------------------4_Méthodes---------------------------------------------------------------------
 	/**
@@ -148,7 +165,9 @@ public class Panier implements Serializable{
 		 */
 		@Override
 		public String toString() {
-			return "Panier [id_panier=" + id_panier + ", prixTotal=" + prixTotal + "]";
+			return "Panier [id_panier=" + id_panier + ", nbArticle=" + nbArticle + ", prixTotal=" + prixTotal
+					+ ", clientP=" + clientP + ", listeLC=" + listeLC + ", cmd=" + cmd + "]";
 		}
+		
 //-------------------------------------------------------------------------------------------------------------
 }
