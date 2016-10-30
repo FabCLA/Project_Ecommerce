@@ -20,34 +20,76 @@ ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
-    width: 25%;
-    background-color: #f1f1f1;
-    position: fixed;
-    height: 100%;
-    overflow: auto;
 }
+
+ul.horiz1 {
+	width: 80%;
+	float: right;
+    overflow: hidden;
+    background-color: #333;
+}
+
+ul.verti {
+    width: 20%;
+    background-color: #f1f1f1;
+    height: 100%; /* Full height */
+    position: fixed; /* Make it stick, even on scroll */
+    overflow: auto; /* Enable scrolling if the sidenav has too much content */
+}
+
+/********************************/
+
+li.horiz1 {
+    float: left;
+}
+
 
 li a {
     display: block;
-    color: #000;
-    padding: 8px 16px;
     text-decoration: none;
 }
 
+
+li.verti a {
+    color: #000;
+    font-size: 15px;
+    padding: 14px 16px;
+}
+
+
+
+li.horiz1 a {
+    color: white;
+    font-size: 15px;
+    text-align: center;
+    padding: 14px 16px;
+}
+
+
+/******************************************/
+
+
 li a.active {
     background-color: #4CAF50;
+}
+
+li.horiz1 a.active {
     color: white;
 }
 
-li a:hover:not(.active) {
+li.verti a.active {
+    bottom: 0; 
+}
+
+/************************************/
+
+li.verti a:hover:not(.active) {
     background-color: #555;
     color: white;
 }
 
-div{
-	width: 75%;
-    float: right;
-    padding: 15px;
+li.horiz1 a:hover {
+    background-color: #111;
 }
 
 
@@ -55,7 +97,9 @@ div{
 table {
     font-family: arial, sans-serif;
     border-collapse: collapse;
-    width: 100%;
+    width: 78%;
+    float: right;
+    margin: 11px;
 }
 
 td, th {
@@ -75,10 +119,18 @@ tr:nth-child(even) {
 <body>
 
 
-<ul>
-  <li><a class="active" href="gestAccueil">Produits</a></li>
-  <li><a href="#news">Categorie</a></li>
-  <li><a href="#contact">Client</a></li>
+
+<ul class="verti">
+  <li class="verti"><a href="gestAccueil">Produits</a></li>
+  <li class="verti"><a href="#gestCategorie">Catégories</a></li>
+  <li class="verti"><a href="#gestClient">Clients</a></li>
+  <li class="verti"><a class="active" href="#gestDeconnection">Déconnection</a></li>
+</ul>
+
+<ul class="horiz1">
+  <li class="horiz1"><a class="active" href="formAjProdGest">Ajouter</a></li>
+  <li class="horiz1"><a href="#upDProd">Modifier</a></li>
+  <li class="horiz1"><a href="#suppProd">Supprimer</a></li>
 </ul>
 
 	<div>
