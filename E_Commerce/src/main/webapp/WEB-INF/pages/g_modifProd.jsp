@@ -105,9 +105,9 @@ div.container {
 	</ul>
 
 	<ul class="horiz1">
-		<li class="horiz1"><a class="active" href="formAjProdGest">Ajouter</a></li>
+		<li class="horiz1"><a class="active" href="gestAddProd">Ajouter</a></li>
 		<li class="horiz1"><a href="gestUpDProd">Modifier</a></li>
-		<li class="horiz1"><a href="formDelProdGest">Supprimer</a></li>
+		<li class="horiz1"><a href="#suppProd">Supprimer</a></li>
 	</ul>
 
 	<div class="container">
@@ -116,8 +116,7 @@ div.container {
 			<div class="form-group">
 				<label class="control-label col-sm-3" for="nom">Nom:</label>
 				<div class="col-sm-7">
-					<input class="form-control" id="nom" placeholder="Produit"
-						name="nom">
+					<input class="form-control" id="nom" placeholder="Produit" name="nom">
 				</div>
 			</div>
 			<div class="form-group">
@@ -130,15 +129,13 @@ div.container {
 			<div class="form-group">
 				<label class="control-label col-sm-3" for="prix">Prix:</label>
 				<div class="col-sm-7">
-					<input class="form-control" id="prix" placeholder="Prix en euros"
-						name="prix">
+					<input class="form-control" id="prix" placeholder="Prix en euros" name="prix">
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="control-label col-sm-3" for="qte">Quantité:</label>
 				<div class="col-sm-7">
-					<input class="form-control" id="qte" placeholder="Quantité"
-						name="quantite">
+					<input class="form-control" id="qte" placeholder="Quantité" name="quantite">
 				</div>
 			</div>
 			<div class="form-group">

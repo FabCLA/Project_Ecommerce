@@ -111,42 +111,13 @@ div.container {
 	</ul>
 
 	<div class="container">
-		<form class="form-horizontal" method="post" action="gestAddProd"
-			modelAttribute="produit">
+		<form class="form-horizontal" method="post" action="gestDelProd" modelAttribute="produit">
 			<div class="form-group">
-				<label class="control-label col-sm-3" for="nom">Nom:</label>
+				<label class="control-label col-sm-3" for="prod">Produit à supprimer</label>
 				<div class="col-sm-7">
-					<input class="form-control" id="nom" placeholder="Produit"
-						name="nom">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="control-label col-sm-3" for="descr">Description:</label>
-				<div class="col-sm-7">
-					<textarea class="form-control" rows="5" id="descr"
-						placeholder="Description" name="description"></textarea>
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="control-label col-sm-3" for="prix">Prix:</label>
-				<div class="col-sm-7">
-					<input class="form-control" id="prix" placeholder="Prix en euros"
-						name="prix">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="control-label col-sm-3" for="qte">Quantité:</label>
-				<div class="col-sm-7">
-					<input class="form-control" id="qte" placeholder="Quantité"
-						name="quantite">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="control-label col-sm-3" for="nomCat">Catégorie</label>
-				<div class="col-sm-7">
-					<select class="form-control" id="nomCat" name="categorie">
-						<c:forEach var="categories" items="${categorieList}">
-							<option>${categories.nom}</option>
+					<select class="form-control" id="prod" name="categorie">
+						<c:forEach var="produits" items="${produitList}">
+							<option>${produits.nom}	${produits.prix}	${produits.quantite}	${produits.categorie.nom}</option>
 						</c:forEach>
 					</select>
 				</div>
@@ -155,7 +126,7 @@ div.container {
 			</div>
 			<div class="form-group">
 				<div class="col-sm-offset-3 col-sm-7">
-					<button type="submit" class="btn btn-primary">Ajouter</button>
+					<button type="submit" class="btn btn-primary">Supprimer</button>
 				</div>
 			</div>
 		</form>
