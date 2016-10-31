@@ -63,6 +63,18 @@ public class PanierServiceImpl implements IPanierService{
 	public Panier getPanierByClientService(Client client) {
 		return panierDao.getPanierByClientDao(client);
 	}
+
+	@Override
+	public int isExistService() {
+		return panierDao.isExistDao();
+	}
+
+	@Override
+	public Panier getActivePanierService() {
+		return panierDao.getActivePanierDao();
+	}
+	
+	
 //----------------------------------------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------------------
 }

@@ -77,7 +77,26 @@ public class PanierDaoImpl implements IPanierDao {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
+	@Override
+	public int isExistDao() {
+		Session s = sf.getCurrentSession();
+		List<Panier> liste =this.getAllPanierDao();
+		if(liste.isEmpty()==true){
+			return 0;
+		}else{
+			return 1;
+		}
+		
+	}
+	@Override
+	public Panier getActivePanierDao() {
+		Session s = sf.getCurrentSession();
+		String req = "FROM Panier p WHERE p.active=true";
+		Query query = s.createQuery(req);
+		return (Panier) query.uniqueResult();
+	}
+	
 //----------------------------------------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------------------
 

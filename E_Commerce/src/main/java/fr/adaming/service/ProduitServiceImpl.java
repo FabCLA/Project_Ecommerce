@@ -68,6 +68,13 @@ public class ProduitServiceImpl implements IProduitService{
 	public Produit getProduitByIdService(long id_produit) {
 		return produitDao.getProduitByIdDao(id_produit);
 	}
+	
+	@Override
+	public long getIdProduitByNomService(String nomProduit) {
+		return produitDao.getIdProduitByNomDao(nomProduit);
+	}
 //----------------------------------------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------------------
+
+
 }

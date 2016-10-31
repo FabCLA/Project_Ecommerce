@@ -6,12 +6,19 @@
  */
 package fr.adaming.dao;
 
+import java.util.List;
+
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import fr.adaming.model.LigneCommande;
+import fr.adaming.model.Panier;
+import fr.adaming.model.Produit;
+import fr.adaming.service.IProduitService;
+import fr.adaming.service.ProduitServiceImpl;
 @Repository
 public class LigneCommandeDaoImpl implements ILigneCommandeDao {
 //----------------------------------------------------------------------------------------------------------------
@@ -21,6 +28,9 @@ public class LigneCommandeDaoImpl implements ILigneCommandeDao {
 	 */
 	@Autowired
 	private SessionFactory sf;
+	
+	@Autowired
+	private IProduitService produitService;
 //----------------------------------------------------------------------------------------------------------------
 //---------------------------------2_Les constructeurs------------------------------------------------------------	
 	/**
@@ -58,7 +68,32 @@ public class LigneCommandeDaoImpl implements ILigneCommandeDao {
 		s.saveOrUpdate(LigneC);
 
 	}
+	
+	@Override
+	public LigneCommande getLigneCByProduitDao(Produit produit, Panier panier) {
+		Session s = sf.getCurrentSession();
+		String req = "FROM LigneCommande lc WHERE lc.produit.id_produit=:produit_id AND lc.panier.id_panier=:panier_id";
+		Query query =s.createQuery(req);
+		
+		
+		query.setParameter("produit_id", produitService.getIdProduitByNomService(produit.getNom()));
+		query.setParameter("panier_id", panier.getId_panier());
+		return (LigneCommande) query.uniqueResult();
+	}
+	
+	@Override
+	public List<LigneCommande> getLCsByPanierDao(Panier panier) {
+		Session s = sf.getCurrentSession();
+		String req ="FROM LigneCommande lc WHERE lc.panier.id_panier=:id";
+		Query query = s.createQuery(req);
+		
+		query.setParameter("id", panier.getId_panier());
+		
+		return query.list();
+	}
 //----------------------------------------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------------------
+
+
 
 }

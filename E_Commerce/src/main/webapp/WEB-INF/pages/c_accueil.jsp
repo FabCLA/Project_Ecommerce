@@ -117,7 +117,7 @@ th {
 		href="${pageContext.request.contextPath}/index/panier">
 		<div>
 			<i class="glyphicon glyphicon-shopping-cart"></i>
-		</div> <span class="bold">Panier</span> <span>0</span>
+		</div> <span class="bold">Panier</span> <span>(${panierActif.nbArticle})</span>
 	</a>
 	<!-- ============================================================================ -->
 	<!-- ===============================Nav Catégorie================================ -->

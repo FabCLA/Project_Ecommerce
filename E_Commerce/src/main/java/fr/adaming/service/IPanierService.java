@@ -37,6 +37,8 @@ public interface IPanierService {
 		public void updatePanierService(Panier panier);
 		public List<Panier> getAllPanierService();
 		public Panier getPanierByClientService(Client client);
+		public int isExistService();
+		public Panier getActivePanierService();
 	//-------------------------------------------------------------------------------------------------------------
 	//-------------------------------------------------------------------------------------------------------------
 }

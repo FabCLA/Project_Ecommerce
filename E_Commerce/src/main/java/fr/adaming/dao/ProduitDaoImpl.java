@@ -6,6 +6,7 @@
  */
 package fr.adaming.dao;
 
+import java.math.BigInteger;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -94,12 +95,11 @@ public class ProduitDaoImpl implements IProduitDao {
 	}
 
 	public long getIdProduitByNomDao(String nomProduit) {
-//		Session s = sf.getCurrentSession();
-//		String req="SELECT id_produit FROM produit WHERE nom=?";
-//		Query query = s.createSQLQuery(req);
-//		query.setParameter(1, nomProduit);
-//		return (long) query.uniqueResult();
-		return 0;
+		Session s = sf.getCurrentSession();
+		String req="SELECT id_produit FROM produit WHERE nom=:id";
+		Query query = s.createSQLQuery(req);
+		query.setParameter("id", nomProduit);
+		return ((BigInteger) query.uniqueResult()).longValue();
 	}
 //----------------------------------------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------------------

@@ -6,12 +6,16 @@
  */
 package fr.adaming.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import fr.adaming.dao.ILigneCommandeDao;
 import fr.adaming.model.LigneCommande;
+import fr.adaming.model.Panier;
+import fr.adaming.model.Produit;
 
 @Service("ligneCommandeBean")
 @Transactional
@@ -53,6 +57,20 @@ public class LigneCommandeServiceImpl implements ILigneCommandeService{
 		ligneCDao.updateLigneCDao(LigneC);
 		
 	}
+	
+	@Override
+	public LigneCommande getLigneCByProduitService(Produit produit, Panier panier) {
+		return ligneCDao.getLigneCByProduitDao(produit, panier);
+	}
+	
+	@Override
+	public List<LigneCommande> getLCsByPanierService(Panier panier) {
+		return ligneCDao.getLCsByPanierDao(panier);
+	}
 //----------------------------------------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------------------
+
+
+
+
 }

@@ -6,7 +6,11 @@
  */
 package fr.adaming.service;
 
+import java.util.List;
+
 import fr.adaming.model.LigneCommande;
+import fr.adaming.model.Panier;
+import fr.adaming.model.Produit;
 
 public interface ILigneCommandeService {
 	//-------------------------------------------------------------------------------------------------------------
@@ -32,6 +36,8 @@ public interface ILigneCommandeService {
 		public void addLigneCService(LigneCommande LigneC);
 		public void deleteLigneCService(long id_LigneC);
 		public void updateLigneCService(LigneCommande LigneC);
+		public LigneCommande getLigneCByProduitService(Produit produit ,Panier panier);
+		public List<LigneCommande> getLCsByPanierService(Panier panier);
 	//-------------------------------------------------------------------------------------------------------------
 	//-------------------------------------------------------------------------------------------------------------
 }

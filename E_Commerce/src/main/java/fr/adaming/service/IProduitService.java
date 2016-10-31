@@ -38,6 +38,7 @@ public interface IProduitService {
 		public List<Produit> getAllProduitService();
 		public List<Produit> getProduitByCategorieService(Categorie categorie);
 		public Produit getProduitByIdService(long id_produit);
+		public long getIdProduitByNomService(String nomProduit);
 	//-------------------------------------------------------------------------------------------------------------
 	//-------------------------------------------------------------------------------------------------------------
 }

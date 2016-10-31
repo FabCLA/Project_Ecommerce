@@ -49,44 +49,66 @@ li a.active {
 
 li
 
+
  
 
+
 a
+
+
 
 
 :hover
 
 
+
+
 :not
 
+
  
+
 
 (
 .active
 
+
  
+
 
 )
 {
 background-color
 
 
+
+
 :
+
 
  
 
+
 #555
+
+
 
 
 ;
 color
 
 
+
+
 :
+
 
  
 
+
 white
+
+
 
 
 ;
@@ -114,7 +136,16 @@ th {
 <title>Panier</title>
 </head>
 <body>
+
+	<ul>
+		<li><a class="active"
+			href="${pageContext.request.contextPath}/index/accueil"><h3
+					style="font-weight: bold;">Accueil</h3></a></li>
+		<li><a href="${pageContext.request.contextPath}/index/panier/deletePanier">Supprimer panier</a>
+	</ul>
+
 	<!-- ===================================Corps==================================== -->
+	<h2 style="font-weight: bold;" align="center">Votre panier</h2>
 	<div style="width: 75%; padding: 15px; margin-left: 2%;">
 		<table>
 			<tr>
@@ -127,12 +158,27 @@ th {
 				<tr>
 					<td><h4 style="font-weight: bold;">${liste.produit.nom}</h4></td>
 					<td>${liste.quantite}
-						<a><i class="glyphicon glyphicon-plus"></i></a> 
-						<a><i class="glyphicon glyphicon-plus"></i></a>
+						<a href="${pageContext.request.contextPath}/index/panier/plus/${liste.produit.id_produit}">
+						<i class="glyphicon glyphicon-plus"></i>
+						</a> 
+						
+						<a href="${pageContext.request.contextPath}/index/panier/moins/${liste.produit.id_produit}">
+						<i class="glyphicon glyphicon-minus"></i>
+						</a>
 					</td>
 					<td>${liste.prix}</td>
+					<td>
+						<a href="${pageContext.request.contextPath}/index/panier/delete/${liste.produit.id_produit}">
+						<i class="glyphicon glyphicon-remove"></i>
+						</a>
+					</td>
 				</tr>
 			</c:forEach>
+			<tr>
+				<td style="font-weight: bold;">Total :</td>
+				<td>${panierActif.nbArticle}</td>
+				<td>${panierActif.prixTotal}</td>
+			</tr>
 		</table>
 	</div>
 	<!-- ============================================================================ -->

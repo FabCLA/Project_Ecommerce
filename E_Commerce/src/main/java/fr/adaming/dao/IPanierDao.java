@@ -37,5 +37,7 @@ public interface IPanierDao {
 	public void updatePanierDao(Panier panier);
 	public List<Panier> getAllPanierDao();
 	public Panier getPanierByClientDao(Client client);
+	public int isExistDao();
+	public Panier getActivePanierDao();
 //-------------------------------------------------------------------------------------------------------------
 }

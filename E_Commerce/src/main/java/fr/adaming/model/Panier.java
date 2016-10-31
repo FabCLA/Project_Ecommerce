@@ -39,6 +39,8 @@ public class Panier implements Serializable{
 		
 		private double prixTotal;
 		
+		private boolean active;
+		
 		@OneToOne(cascade=CascadeType.PERSIST)
 		@JoinColumn(name="client_id",referencedColumnName="id_client")
 		private Client clientP;
@@ -62,20 +64,22 @@ public class Panier implements Serializable{
 		/**
 		 * @param prixTotal
 		 */
-		public Panier(double prixTotal, int nbArticle) {
+		public Panier(double prixTotal, int nbArticle, boolean active) {
 			super();
 			this.prixTotal = prixTotal;
 			this.nbArticle = nbArticle;
+			this.active = active;
 		}
 		/**
 		 * @param id_panier
 		 * @param prixTotal
 		 */
-		public Panier(long id_panier, double prixTotal, int nbArticle) {
+		public Panier(long id_panier, double prixTotal, int nbArticle, boolean active) {
 			super();
 			this.id_panier = id_panier;
 			this.prixTotal = prixTotal;
 			this.nbArticle = nbArticle;
+			this.active = active;
 		}
 //-------------------------------------------------------------------------------------------------------------
 //------------------------------3_Les Getters et Setters-------------------------------------------------------
@@ -155,7 +159,20 @@ public class Panier implements Serializable{
 		public void setNbArticle(int nbArticle) {
 			this.nbArticle = nbArticle;
 		}
-//-------------------------------------------------------------------------------------------------------------
+		
+		/**
+		 * @return the active
+		 */
+		public boolean isActive() {
+			return active;
+		}
+		/**
+		 * @param active the active to set
+		 */
+		public void setActive(boolean active) {
+			this.active = active;
+		}
+	//-------------------------------------------------------------------------------------------------------------
 //------------------------------4_Méthodes---------------------------------------------------------------------
 	/**
 	 * 4_Méthodes
@@ -166,8 +183,8 @@ public class Panier implements Serializable{
 		@Override
 		public String toString() {
 			return "Panier [id_panier=" + id_panier + ", nbArticle=" + nbArticle + ", prixTotal=" + prixTotal
-					+ ", clientP=" + clientP + ", listeLC=" + listeLC + ", cmd=" + cmd + "]";
+					+ ", active=" + active +  "]";
 		}
-		
+
 //-------------------------------------------------------------------------------------------------------------
 }

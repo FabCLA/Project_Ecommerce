@@ -8,7 +8,11 @@ package fr.adaming.dao;
 
 
 
+import java.util.List;
+
 import fr.adaming.model.LigneCommande;
+import fr.adaming.model.Panier;
+import fr.adaming.model.Produit;
 
 public interface ILigneCommandeDao {
 //------------------------------1_Les propriétés (champs, attributs)-------------------------------------------
@@ -33,5 +37,7 @@ public interface ILigneCommandeDao {
 	public void addLigneCDao(LigneCommande LigneC);
 	public void deleteLigneCDao(long id_LigneC);
 	public void updateLigneCDao(LigneCommande LigneC);
+	public LigneCommande getLigneCByProduitDao(Produit produit, Panier panier);
+	public List<LigneCommande> getLCsByPanierDao(Panier panier);
 //-------------------------------------------------------------------------------------------------------------
 }

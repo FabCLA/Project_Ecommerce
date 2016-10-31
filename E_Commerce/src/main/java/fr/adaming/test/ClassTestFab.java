@@ -11,6 +11,8 @@ import fr.adaming.model.LigneCommande;
 import fr.adaming.model.Panier;
 import fr.adaming.model.Produit;
 import fr.adaming.service.ICategorieService;
+import fr.adaming.service.ILigneCommandeService;
+import fr.adaming.service.IPanierService;
 import fr.adaming.service.IProduitService;
 
 
@@ -34,11 +36,11 @@ public class ClassTestFab {
 			ICategorieService catService = (ICategorieService) cxt.getBean("categorieServiceBean");
 			
 		//Ajout à la base de donnée
-			catService.addCategorieService(cat1);
-			catService.addCategorieService(cat2);
-			catService.addCategorieService(cat3);
-			catService.addCategorieService(cat4);
-			catService.addCategorieService(cat5);
+//			catService.addCategorieService(cat1);
+//			catService.addCategorieService(cat2);
+//			catService.addCategorieService(cat3);
+//			catService.addCategorieService(cat4);
+//			catService.addCategorieService(cat5);
 			
 	//-------------------------------------------------------------------------------------------------------------------------------------
 	//--------------------------------------------Ajout des produits(test)-----------------------------------------------------------------
@@ -96,9 +98,15 @@ public class ClassTestFab {
 //				}
 	//-------------------------------------------------------------------------------------------------------------------------------------		
 			
-				
-	
-				
+//				ILigneCommandeService ligneCService = (ILigneCommandeService) cxt.getBean("ligneCommandeBean");
+//				IPanierService panierService = (IPanierService) cxt.getBean("PanierServiceBean");
+//				
+//				Panier panier = panierService.getActivePanierService();
+//				System.out.println(panier);
+//				System.out.println(ligneCService.getLCsByPanierService(panier));
+//				System.out.println("======================================================================");
+//				System.out.println(produitService.getIdProduitByNomService(p1.getNom()));
+//				System.out.println(ligneCService.getLigneCByProduitService(p1, panier));
 				
 	}
 
