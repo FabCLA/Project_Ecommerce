@@ -6,10 +6,8 @@
  */
 package fr.adaming.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -66,16 +64,18 @@ public class ClientController {
 	 */
 	@RequestMapping(value="/accueil", method=RequestMethod.GET)
 	public String accueilClient(ModelMap model){
-		
 		//Récupération ou création d'un panier
 		if(panierService.isExistService()==0){
 			panier = new Panier();
 			panier.setActive(true);
 			panier.setNbArticle(0);
 			panierService.addPanierService(panier);
+			panier = panierService.getActivePanierService();
 		}else{
 			panier = panierService.getActivePanierService();
 		}
+		
+		model.addAttribute("panierActif", panier);
 		
 		//Récupération de la liste des catégories 
 		List<Categorie> listeCat = catService.getAllCategorieService();
@@ -121,6 +121,7 @@ public class ClientController {
 		//Récupération du produit par l'ID
 		Produit produit = produitService.getProduitByIdService(produit_id);
 		
+		//Récupérer ou créer un panier
 		if(panierService.isExistService()==0){
 			panier = new Panier();
 			panier.setActive(true);
@@ -130,6 +131,7 @@ public class ClientController {
 		}
 		
 		
+		//Tester si la ligne de commande pour le produit existe
 		if(LCService.getLigneCByProduitService(produit, panier)==null){
 			LigneCommande ligneC =new LigneCommande();	
 			ligneC.setProduit(produit);
@@ -137,34 +139,43 @@ public class ClientController {
 			ligneC.setPrix(produit.getPrix());
 			ligneC.setPanier(panier);
 			
-			LCService.addLigneCService(ligneC);			
+			LCService.addLigneCService(ligneC);	
+			
+			//Actualisation des données du panier
+			int nbArticle = panier.getNbArticle()+1;
+			panier.setNbArticle(nbArticle);
+			
+			double prixTotal = panier.getPrixTotal()+produit.getPrix();
+			panier.setPrixTotal(prixTotal);
 			
 		}else{
 			LigneCommande ligneC =LCService.getLigneCByProduitService(produit, panier);
 			
-			int quantite =ligneC.getQuantite()+1;
-			ligneC.setQuantite(quantite);
-			
-			double prix = produit.getPrix()*quantite;
-			ligneC.setPrix(prix);
-			
-			ligneC.setPanier(panier);
-			
-			LCService.updateLigneCService(ligneC);
-			
+			//Tester si la quantité dans la ligne de commande ne dépasse pas la la quantité en stock
+			if(ligneC.getQuantite()<produit.getQuantite()){
+				int quantite =ligneC.getQuantite()+1;
+				ligneC.setQuantite(quantite);
+				
+				double prix = produit.getPrix()*quantite;
+				ligneC.setPrix(prix);
+				
+				ligneC.setPanier(panier);
+				
+				LCService.updateLigneCService(ligneC);
+
+				//Actualisation des données du panier
+				int nbArticle = panier.getNbArticle()+1;
+				panier.setNbArticle(nbArticle);
+				
+				double prixTotal = panier.getPrixTotal()+produit.getPrix();
+				panier.setPrixTotal(prixTotal);
+				
+			}
 		}
-		
+
 		//mise à jour du panier
-		int nbArticle = panier.getNbArticle()+1;
-		panier.setNbArticle(nbArticle);
-		
-		double prixTotal = panier.getPrixTotal()+produit.getPrix();
-		panier.setPrixTotal(prixTotal);
-		
 		panierService.updatePanierService(panier);
 		
-		model.addAttribute("panierActif", panier);
-
 		//Récupération de la liste des catégories 
 		List<Categorie> listeCat = catService.getAllCategorieService();
 		model.addAttribute("cat_liste", listeCat);
@@ -173,6 +184,7 @@ public class ClientController {
 		List<Produit> listeProd = produitService.getAllProduitService();
 		model.addAttribute("prod_liste", listeProd);
 		
+		model.addAttribute("panierActif", panier);
 		
 		return"c_accueil";
 	
@@ -189,25 +201,30 @@ public class ClientController {
 		//récupérer la ligne de commande par le panier et le produit
 		LigneCommande ligneC = LCService.getLigneCByProduitService(produit, panier);
 		
-		// mise à jour de la ligne de commande
-		int quantite =ligneC.getQuantite()+1;
-		ligneC.setQuantite(quantite);
-		
-		double prix = produit.getPrix()*quantite;
-		ligneC.setPrix(prix);
-		
-		ligneC.setPanier(panier);
-		
-		LCService.updateLigneCService(ligneC);
-		
-		//mise à jour du panier
-		int nbArticle = panier.getNbArticle()+1;
-		panier.setNbArticle(nbArticle);
-		
-		double prixTotal = panier.getPrixTotal()+produit.getPrix();
-		panier.setPrixTotal(prixTotal);
-		
-		panierService.updatePanierService(panier);
+		//Tester si la quantité dans la ligne de commande ne dépasse pas la la quantité en stock
+		if(ligneC.getQuantite()<produit.getQuantite()){
+			
+			// mise à jour de la ligne de commande
+			int quantite =ligneC.getQuantite()+1;
+			ligneC.setQuantite(quantite);
+			
+			double prix = produit.getPrix()*quantite;
+			ligneC.setPrix(prix);
+			
+			ligneC.setPanier(panier);
+			
+			LCService.updateLigneCService(ligneC);
+			
+			//mise à jour du panier
+			int nbArticle = panier.getNbArticle()+1;
+			panier.setNbArticle(nbArticle);
+			
+			double prixTotal = panier.getPrixTotal()+produit.getPrix();
+			panier.setPrixTotal(prixTotal);
+			
+			panierService.updatePanierService(panier);
+			
+		}
 		
 		//Actualise le panier
 		List<LigneCommande> listeLC = LCService.getLCsByPanierService(panier);

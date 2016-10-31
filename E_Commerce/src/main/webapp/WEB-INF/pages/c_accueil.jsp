@@ -38,6 +38,7 @@ ul {
 	overflow: auto;
 }
 
+
 li a {
 	display: block;
 	color: #000;
@@ -95,6 +96,7 @@ th {
 	background-color: #4CAF50;
 	color: white;
 }
+
 </style>
 
 
@@ -104,21 +106,24 @@ th {
 <body>
 	<!-- ==================================Header==================================== -->
 	<!-- 	Bouton login -->
-	<a
-		style="background-color: silver; color: white; padding: 14px 25px; text-align: center; display: inline-block; float: right; border: 1px solid gray;">
-		<div>
-			<i class="glyphicon glyphicon-user"></i>
-		</div> <span class="bold">Login</span>
-	</a>
 
+			<a
+				style="background-color: silver; color: white; padding: 14px 25px; text-align: center; display: inline-block; float: right; border: 1px solid gray;">
+				<div>
+					<i class="glyphicon glyphicon-user"></i>
+				</div> <span class="bold">Login</span>
+			</a>
+		
 	<!-- 	Bouton panier -->
-	<a
-		style="background-color: silver;; color: white; padding: 14px 25px; text-align: center; display: inline-block; float: right; border: 1px solid gray;"
-		href="${pageContext.request.contextPath}/index/panier">
-		<div>
-			<i class="glyphicon glyphicon-shopping-cart"></i>
-		</div> <span class="bold">Panier</span> <span>(${panierActif.nbArticle})</span>
-	</a>
+	
+		<a
+			style="background-color: silver;; color: white; padding: 14px 25px; text-align: center; display: inline-block; float: right; border: 1px solid gray;"
+			href="${pageContext.request.contextPath}/index/panier">
+			<div>
+				<i class="glyphicon glyphicon-shopping-cart"></i>
+			</div> <span class="bold">Panier</span> <span>(${panierActif.nbArticle})</span>
+		</a>
+
 	<!-- ============================================================================ -->
 	<!-- ===============================Nav Catégorie================================ -->
 	<ul>
@@ -134,8 +139,10 @@ th {
 	</ul>
 	<!-- ============================================================================ -->
 	<!-- ===================================Corps==================================== -->
+	<br/>
+	<h2 style="font-weight: bold;margin-left: 250px;" align="center">Bienvenue sur ce site d'Ecommerce</h2>
 	<div style="width: 75%; padding: 15px; margin-left: 2%;">
-		<table>
+		<table style="border: 1px solid green">
 			<tr>
 
 				<th style="font-weight: bold;">Produit</th>
@@ -144,14 +151,14 @@ th {
 				<th></th>
 			</tr>
 			<c:forEach var="prod" items="${prod_liste}">
-				<tr>
+				<tr style="border: 1px solid green">
 
 					<td><h4 style="font-weight: bold;">${prod.nom}</h4> <br />
 						${prod.description}</td>
-					<td>${prod.prix}</td>
+					<td>${prod.prix} <i class="glyphicon glyphicon-eur"></i></td>
 					<td>${prod.quantite}</td>
-					<td><a href="${pageContext.request.contextPath}/index/addProd/${prod.id_produit}">
-							<div>
+					<td>
+						<a href="${pageContext.request.contextPath}/index/addProd/${prod.id_produit}">
 								<i class="glyphicon glyphicon-shopping-cart"></i>
 							</div>
 					</a></td>
@@ -160,5 +167,10 @@ th {
 		</table>
 	</div>
 	<!-- ============================================================================ -->
+<script>
+	$(document).ready(function(){
+	    $('[data-toggle="popover"]').popover();   
+	});
+</script>
 </body>
 </html>

@@ -2,6 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -49,67 +50,28 @@ li a.active {
 
 li
 
-
- 
-
-
 a
-
-
-
 
 :hover
 
-
-
-
 :not
-
-
- 
-
 
 (
 .active
-
-
- 
-
 
 )
 {
 background-color
 
-
-
-
 :
-
-
- 
-
-
 #555
-
-
-
 
 ;
 color
 
-
-
-
 :
 
-
- 
-
-
 white
-
-
-
 
 ;
 }
@@ -145,6 +107,7 @@ th {
 	</ul>
 
 	<!-- ===================================Corps==================================== -->
+	<br/>
 	<h2 style="font-weight: bold;" align="center">Votre panier</h2>
 	<div style="width: 75%; padding: 15px; margin-left: 2%;">
 		<table>
@@ -166,7 +129,7 @@ th {
 						<i class="glyphicon glyphicon-minus"></i>
 						</a>
 					</td>
-					<td>${liste.prix}</td>
+					<td style="font-weight: bold;">${liste.prix}<i class="glyphicon glyphicon-eur"></i></td>
 					<td>
 						<a href="${pageContext.request.contextPath}/index/panier/delete/${liste.produit.id_produit}">
 						<i class="glyphicon glyphicon-remove"></i>
@@ -174,10 +137,10 @@ th {
 					</td>
 				</tr>
 			</c:forEach>
-			<tr>
+			<tr style="border: 2px solid black">
 				<td style="font-weight: bold;">Total :</td>
-				<td>${panierActif.nbArticle}</td>
-				<td>${panierActif.prixTotal}</td>
+				<td style="font-weight: bold;">${panierActif.nbArticle}</td>
+				<td style="font-weight: bold;">${panierActif.prixTotal}<i class="glyphicon glyphicon-eur"></i></td>
 			</tr>
 		</table>
 	</div>
