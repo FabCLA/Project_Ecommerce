@@ -9,6 +9,7 @@ package fr.adaming.dao;
 import java.util.List;
 
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Repository;
 
 import fr.adaming.model.Client;
 import fr.adaming.model.Commande;
+import fr.adaming.model.Produit;
 
 @Repository
 public class CommandeDaoImpl implements ICommandeDao {
@@ -66,6 +68,19 @@ public class CommandeDaoImpl implements ICommandeDao {
 		
 		return query.list();
 	}
+	
+	public List<Commande> getCommandesByIdClientDao(long id_client) {
+		Session s = sf.getCurrentSession();
+		
+		String reqSql="SELECT * FROM commande WHERE client_id=?";
+		SQLQuery querySql=s.createSQLQuery(reqSql);
+		querySql.addEntity(Commande.class);
+		
+		querySql.setParameter(0, id_client);
+		
+		return querySql.list();
+	}
+
 //----------------------------------------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------------------
 

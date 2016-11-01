@@ -76,19 +76,35 @@ li.verti a.active {
 }
 
 /************************************/
+
 li.verti a:hover:not (.active ) {
 	background-color: #555;
 	color: white;
 }
-
 li.horiz1 a:hover {
 	background-color: #111;
 }
 
-div.container {
+li.verti a:hover {
+	background-color: lightgray;
+}
+
+table {
+	font-family: arial, sans-serif;
+	border-collapse: collapse;
 	width: 78%;
 	float: right;
-	margin-top: 40px;
+	margin: 11px;
+}
+
+td, th {
+	border: 1px solid #dddddd;
+	text-align: left;
+	padding: 8px;
+}
+
+tr:nth-child(even) {
+	background-color: #dddddd;
 }
 </style>
 
@@ -105,62 +121,34 @@ div.container {
 	</ul>
 
 	<ul class="horiz1">
-		<li class="horiz1"><a class="active" href="${pageContext.request.contextPath}/gestionnaire/formAjProdGest">Ajouter</a></li>
-		<li class="horiz1"><a href="${pageContext.request.contextPath}/gestionnaire/formModif1">Modifier</a></li>
-		<li class="horiz1"><a href="${pageContext.request.contextPath}/gestionnaire/formDelProdGest">Supprimer</a></li>
+		<li class="horiz1"><a href="${pageContext.request.contextPath}/gestionnaire/formDelClientGest">Supprimer</a></li>
 	</ul>
 
-	<div class="container">
-		<form class="form-horizontal" method="post" action="gestAddProd"
-			modelAttribute="produit">
-			<div class="form-group">
-				<label class="control-label col-sm-3" for="nom">Nom:</label>
-				<div class="col-sm-7">
-					<input class="form-control" id="nom" placeholder="Produit"
-						name="nom">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="control-label col-sm-3" for="descr">Description:</label>
-				<div class="col-sm-7">
-					<textarea class="form-control" rows="5" id="descr"
-						placeholder="Description" name="description"></textarea>
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="control-label col-sm-3" for="prix">Prix:</label>
-				<div class="col-sm-7">
-					<input class="form-control" id="prix" placeholder="Prix en euros"
-						name="prix">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="control-label col-sm-3" for="qte">Quantité:</label>
-				<div class="col-sm-7">
-					<input class="form-control" id="qte" placeholder="Quantité"
-						name="quantite">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="control-label col-sm-3" for="nomCat">Catégorie</label>
-				<div class="col-sm-7">
-					<select class="form-control" id="nomCat" name="categorie">
-						<c:forEach var="categories" items="${categorieList}">
-							<option>${categories.nom}</option>
-						</c:forEach>
-					</select>
-				</div>
-				<br>
+	<div>
 
-			</div>
-			<div class="form-group">
-				<div class="col-sm-offset-3 col-sm-7">
-					<button type="submit" class="btn btn-primary">Ajouter</button>
-				</div>
-			</div>
-		</form>
+		<table>
+
+			<tr bgcolor="grey" style="color: white">
+				<th>Id</th>
+				<th>Date de la commande</th>
+				<th>Aller aux</th>
+			</tr>
+
+			<c:forEach var="commandClient" items="${listeCommandClient}">
+				<tr>
+					<td>${commandClient.id_commande}</td>
+					<td>${commandClient.date_commande}</td>
+					<td>
+						<form action="${pageContext.request.contextPath}/gestionnaire/gestCommandClient/${commandClient.id_commande}" method="get">							
+								<button type="submit" class="btn btn-primary">Lignes de commande</button>							
+						</form>						
+					</td>
+				</tr>
+			</c:forEach>
+			
+		</table>
+
 	</div>
-
 
 </body>
 </html>

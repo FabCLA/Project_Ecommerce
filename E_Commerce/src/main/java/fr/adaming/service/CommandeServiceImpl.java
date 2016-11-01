@@ -52,6 +52,10 @@ public class CommandeServiceImpl implements ICommandeService{
 	public List<Commande> getCommandesByClientService(Client client) {
 		return cmdDao.getCommandesByClientDao(client);
 	}
+	
+	public List<Commande> getCommandesByIdClientService(long id_client){
+		return cmdDao.getCommandesByIdClientDao(id_client);
+	}
 //----------------------------------------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------------------
 }

@@ -10,6 +10,7 @@ import java.util.List;
 
 import fr.adaming.model.Client;
 import fr.adaming.model.Commande;
+import fr.adaming.model.Produit;
 
 public interface ICommandeDao {
 //------------------------------1_Les propriétés (champs, attributs)-------------------------------------------
@@ -34,5 +35,6 @@ public interface ICommandeDao {
 	public void addCommandeDao(Commande cmd);
 	public void deleteComandeDao(long id_cmd);
 	public List<Commande> getCommandesByClientDao(Client client);
+	public List<Commande> getCommandesByIdClientDao(long id_client);
 //-------------------------------------------------------------------------------------------------------------
 }

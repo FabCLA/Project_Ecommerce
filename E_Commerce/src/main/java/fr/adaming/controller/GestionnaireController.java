@@ -12,10 +12,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import fr.adaming.model.Categorie;
+import fr.adaming.model.Client;
+import fr.adaming.model.Commande;
 import fr.adaming.model.Gestionnaire;
+import fr.adaming.model.LigneCommande;
 import fr.adaming.model.Produit;
 import fr.adaming.service.ICategorieService;
+import fr.adaming.service.IClientService;
+import fr.adaming.service.ICommandeService;
 import fr.adaming.service.IGestionnaireService;
+import fr.adaming.service.ILigneCommandeService;
 import fr.adaming.service.IProduitService;
 
 @Controller
@@ -26,7 +32,16 @@ public class GestionnaireController {
 	private IProduitService prodService;
 	
 	@Autowired
-	private ICategorieService categorieService;
+	private ICategorieService categorieService;	
+	
+	@Autowired
+	private IClientService clientService;	
+	
+	@Autowired
+	private ICommandeService commandeService;
+	
+	@Autowired
+	private ILigneCommandeService ligneCommandeService;
 	
 	//----------------------------------------------------------------------------------------------------------------
 	//---------------------------------1_Les propriétés (champs, attributs)-------------------------------------------
@@ -71,6 +86,46 @@ public class GestionnaireController {
 			model.addAttribute("listeCat", liste);
 			
 			return "g_categories";
+		}
+		
+//-------------------------------Tableau de Clients-----------------------------------------
+
+
+
+		@RequestMapping(value="/gestClients", method=RequestMethod.GET)
+		public String clientsGest(ModelMap model){
+			
+			List<Client> liste = clientService.getAllClientService();
+			model.addAttribute("listeClient", liste);
+			
+			return "g_clients";
+		}
+		
+		
+		
+//-------------------------------Tableau des Commandes d'un Client-----------------------------------------
+
+
+		@RequestMapping(value = "/gestCommandClient/{ClientID}", method = RequestMethod.GET)
+		public String commandClient(@PathVariable("ClientID") long id_client, ModelMap model) {
+						
+			List<Commande> liste = commandeService.getCommandesByIdClientService(id_client);
+			model.addAttribute("listeCommandClient", liste);
+			
+			return "g_commandClient";
+		}
+		
+
+//-------------------------------Tableau des Lignes d'une Commande-----------------------------------------
+
+
+		@RequestMapping(value = "/gestLignesCommand/{CommandeID}", method = RequestMethod.GET)
+		public String lignesCommand(@PathVariable("CommandeID") long id_commande, ModelMap model) {
+						
+			List<LigneCommande> liste = ligneCommandeService.getLigneCByIdCommandeService(id_commande);
+			model.addAttribute("listeLignesCommand", liste);
+			
+			return "g_lignesByCommande";
 		}
 		
 		
@@ -162,30 +217,57 @@ public class GestionnaireController {
 //-------------------------------Supprimer Categorie-----------------------------------------
 		
 		
+		@RequestMapping(value="/formDelCatGest", method=RequestMethod.GET)
+		public String delCatGest(ModelMap model){
+			
+			List<Categorie> liste = categorieService.getAllCategorieService();
+			model.addAttribute("listeCat", liste);
+			
+			return "g_suppCat";
+		}
 		
-				@RequestMapping(value="/formDelCatGest", method=RequestMethod.GET)
-				public String delCatGest(ModelMap model){
-					
-					List<Categorie> liste = categorieService.getAllCategorieService();
-					model.addAttribute("listeCat", liste);
-					
-					return "g_suppCat";
-				}
-				
-				
-				@RequestMapping(value = "/gestDeleteCat/{ProduitID}", method = RequestMethod.GET)
-				public String suppCatGest(@PathVariable("ProduitID") long id_categorie, ModelMap model) {
-					
-					// suppression de la categorie de la bdd
-					this.categorieService.deleteCategorieService(id_categorie);
+		
+		@RequestMapping(value = "/gestDeleteCat/{CatID}", method = RequestMethod.GET)
+		public String suppCatGest(@PathVariable("CatID") long id_categorie, ModelMap model) {
+			
+			// suppression de la categorie de la bdd
+			this.categorieService.deleteCategorieService(id_categorie);
+		
+			List<Categorie> liste = categorieService.getAllCategorieService();
+			model.addAttribute("listeCat", liste);
+		
+			return "g_suppCat";
+			
+		}
 
-					List<Categorie> liste = categorieService.getAllCategorieService();
-					model.addAttribute("listeCat", liste);
+		
+		
+		
+//-------------------------------Supprimer Client-----------------------------------------
 
-					return "g_suppCat";
-					
-				}
 
+		@RequestMapping(value="/formDelClientGest", method=RequestMethod.GET)
+		public String delClientGest(ModelMap model){
+			
+			List<Client> liste = clientService.getAllClientService();
+			model.addAttribute("listeClient", liste);
+			
+			return "g_suppClient";
+		}
+		
+		
+		@RequestMapping(value = "/gestDeleteClient/{ClientID}", method = RequestMethod.GET)
+		public String suppClientGest(@PathVariable("ClientID") long id_client, ModelMap model) {
+			
+			// suppression du client de la bdd
+			this.clientService.deleteClientService(id_client);
+		
+			List<Client> liste = clientService.getAllClientService();
+			model.addAttribute("listeClient", liste);
+		
+			return "g_suppClient";
+			
+		}
 		
 		
 //-------------------------------Modifier Produit-----------------------------------------		
