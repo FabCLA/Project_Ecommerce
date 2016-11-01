@@ -111,7 +111,7 @@ th {
 	
 	<!-- ===================================Corps==================================== -->
 	<br/>
-	<div style="width: 75%; padding: 15px; margin-left: 200px;">
+	<div style="width: 75%; padding: 15px; margin-left: 205px;">
 	<h2 style="font-weight: bold;" align="center">Votre Commande</h2>
 	<h4>Nom : </h4>${client.nom}
 	<br/>
