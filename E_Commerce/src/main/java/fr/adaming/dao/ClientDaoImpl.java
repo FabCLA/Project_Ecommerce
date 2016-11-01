@@ -82,11 +82,14 @@ public class ClientDaoImpl implements IClientDao {
 		return query.list();
 	}
 	
-	public Client getClientByIdDao(long id_client) {
+	public Client getClientByIdentifiantDao(String mail, String password) {
 		Session s = sf.getCurrentSession();
-		String req = "FROM Client c WHERE c.id_client=:client_id";
+		String req = "FROM Client c WHERE c.mail=:mailC AND c.password=:passwordC";
 		Query query = s.createQuery(req);
-		query.setParameter("client_id", id_client);
+		
+		query.setParameter("mailC", mail);
+		query.setParameter("passwordC", password);
+		
 		return (Client) query.uniqueResult();
 	}
 //----------------------------------------------------------------------------------------------------------------

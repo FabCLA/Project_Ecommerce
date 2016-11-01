@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+    pageEncoding="ISO-8859-1"%>
+    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -18,8 +16,8 @@
 	rel="stylesheet">
 <script src="<c:url value="/resources/javascript/bootstrap.min.js" />"></script>
 
-
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
 <style>
 body {
 	margin: 0;
@@ -95,9 +93,10 @@ th {
 	color: white;
 }
 
+
 </style>
 
-<title>Commande</title>
+<title>Modifier Information</title>
 </head>
 <body>
 	<!-- ===================================Nav====================================== -->
@@ -106,44 +105,42 @@ th {
 			href="${pageContext.request.contextPath}/index/accueil"><h3
 					style="font-weight: bold;">E-Commerce</h3></a>
 		</li>
+		<li><a
+				href="${pageContext.request.contextPath}/index/modifier/">Modifier</a>
+		</li>
+		<li><a
+				href="#">Déconnexion</a>
+		</li>
 	</ul>
 	<!-- ============================================================================ -->
-	
-	<!-- ===================================Corps==================================== -->
 	<br/>
-	<div style="width: 75%; padding: 15px; margin-left: 200px;">
-	<h2 style="font-weight: bold;" align="center">Votre Commande</h2>
-	<h4>Nom : </h4>${client.nom}
-	<br/>
-	<h4>Adresse : </h4>${client.adresse}
-	<br/>
-	<h4>Telephone : </h4>${client.tel}
-	<br/>
-	<h4>Mail : </h4>${client.mail}
-	<br/>
+	<div
+		style="margin-left: 250px; width: 70%; padding: 10px; border: 1px solid green; border-left: 4px solid green;">
+		<h4 align="center">Informations personnels</h4>
+		<form style="padding: 15px; width: 95%;" class="form-horizontal"
+			method="post" action="${pageContext.request.contextPath}/index/modifClient" modelAttribute="client">
+			<div class="form-group">
+				<label for="nom">Nom :</label> <input type="text"
+					class="form-control" id="nom" name="nom" value="${clientS.nom}">
+			</div>
+			<div class="form-group">
+				<label for="adresse">Adresse :</label> <input type="text"
+					class="form-control" id="adresse" name="adresse" value="${clientS.adresse}">
+			</div>
+			<div class="form-group">
+				<label for="tel">Telephone :</label> <input class="form-control"
+					id="tel" name="tel" value="${clientS.tel}">
+			</div>
+			<div class="form-group">
+				<label for="email">Adresse mail :</label> <input type="text"
+					class="form-control" id="email" name="mail" value="${clientS.mail}">
+			</div>
+			<div class="form-group">
+				<label for="pwd">Password:</label> <input type="password"
+					class="form-control" id="pwd" name="password" value="${clientS.password}">
+			</div>
+			<button type="submit" class="btn btn-default">modifer</button>
+		</form>
 	</div>
-	<div style="width: 75%; padding: 15px; margin-left: 2%;">
-		<table>
-			<tr>
-				<th style="font-weight: bold;">Produit</th>
-				<th style="font-weight: bold;">Quantité</th>
-				<th style="font-weight: bold;">Prix</th>
-				<th></th>
-			</tr>
-			<c:forEach var="liste" items="${liste}">
-				<tr>
-					<td><h4 style="font-weight: bold;">${liste.produit.nom}</h4></td>
-					<td>${liste.quantite}</td>
-					<td style="font-weight: bold;">${liste.prix}<i class="glyphicon glyphicon-eur"></i></td>
-				</tr>
-			</c:forEach>
-			<tr style="border: 2px solid black">
-				<td style="font-weight: bold;">Total :</td>
-				<td style="font-weight: bold;">${panierActif.nbArticle}</td>
-				<td style="font-weight: bold;">${panierActif.prixTotal}<i class="glyphicon glyphicon-eur"></i></td>
-			</tr>
-		</table>
-	</div>
-	<!-- ============================================================================ -->
 </body>
 </html>

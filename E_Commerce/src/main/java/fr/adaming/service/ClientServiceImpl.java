@@ -62,6 +62,12 @@ public class ClientServiceImpl implements IClientService{
 	public List<Client> getAllClientService() {
 		return clientDao.getAllClientDao();
 	}
+	
+	@Override
+	public Client getClientByIdentifiantService(String mail, String password) {
+		
+		return clientDao.getClientByIdentifiantDao(mail, password);
+	}
 //----------------------------------------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------------------
 

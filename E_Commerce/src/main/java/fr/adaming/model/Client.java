@@ -11,6 +11,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -45,7 +46,7 @@ public class Client implements Serializable{
 		@OneToMany(mappedBy="client")
 		private List<Commande> listeCommandes;
 		
-		@OneToOne(mappedBy="clientP")
+		@OneToOne(mappedBy="clientP",cascade=CascadeType.REMOVE)
 		private Panier panier;
 		
 		@PostConstruct

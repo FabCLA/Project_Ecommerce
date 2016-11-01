@@ -9,20 +9,25 @@ package fr.adaming.controller;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import fr.adaming.model.Categorie;
+import fr.adaming.model.Client;
 import fr.adaming.model.Commande;
 import fr.adaming.model.LigneCommande;
 import fr.adaming.model.Panier;
 import fr.adaming.model.Produit;
 import fr.adaming.service.ICategorieService;
+import fr.adaming.service.IClientService;
 import fr.adaming.service.ILigneCommandeService;
 import fr.adaming.service.IPanierService;
 import fr.adaming.service.IProduitService;
@@ -47,6 +52,8 @@ public class ClientController {
 	@Autowired
 	private IPanierService panierService;
 	
+	@Autowired
+	private IClientService clientService;
 	private Panier panier;
 	
 //----------------------------------------------------------------------------------------------------------------
@@ -64,14 +71,109 @@ public class ClientController {
 	/**
 	 * 4_Méthodes
 	 */
-	@RequestMapping(value="/login",method=RequestMethod.GET)
+	@RequestMapping(value="/login", method=RequestMethod.GET)
 	public String login(ModelMap model){
+		
+			return "login";
+		
+	}
+	
+	@RequestMapping(value="/addClient", method=RequestMethod.POST)
+	public String addClient(@ModelAttribute("client") Client client, ModelMap model){
+		//Vérifier si le client exist
+		int i =clientService.isExistService(client.getMail(), client.getPassword());
+		
+		if(i==1){
+				//Exception à ajouter
+		}else{
+			//Ajouter client dans la database
+			clientService.addClientService(client);
+		}
+
 		
 		return "login";
 	}
 	
+	@RequestMapping(value="/modifier", method=RequestMethod.POST)
+	public String modifier(@ModelAttribute("client") Client cl, ModelMap model, HttpServletRequest req){
+		//Recupérer la session
+		HttpSession session = req.getSession();
+		Client client = (Client) session.getAttribute("clientSession");
+		
+		//modifier ses attributs
+		client.setNom(cl.getNom());
+		client.setAdresse(cl.getAdresse());
+		client.setMail(cl.getMail());
+		client.setPassword(cl.getPassword());
+		client.setTel(cl.getTel());
+		
+		clientService.updateClientService(client);
+		
+		return "c_modifClient";
+	}
+	
+	@RequestMapping(value="/modifClient", method=RequestMethod.GET)
+	public String modifClient(ModelMap model, HttpServletRequest req){
+		//Récupérer la session 
+		HttpSession session = req.getSession();
+		
+		//Ajouter le client de la session dans le model
+		model.addAttribute("clientS", session.getAttribute("clientSession"));
+		
+		return "c_modifClient";
+	}
+	
+	@RequestMapping(value="/findClient", method=RequestMethod.POST)
+	public String findClient(@ModelAttribute("client") Client cl, HttpServletRequest req, ModelMap model){
+		//Vérifier si le client exist
+		int i =clientService.isExistService(cl.getMail(), cl.getPassword());
+
+		if(i==1){
+			//Récupérer le client 
+			Client client = clientService.getClientByIdentifiantService(cl.getMail(), cl.getPassword());
+			
+			//Récupérer ou créer un panier
+			if(panierService.isExistService()==0){
+				panier = new Panier();
+				panier.setActive(true);
+				panierService.addPanierService(panier);
+			}else{
+				panier = panierService.getActivePanierService();
+			}
+			
+			//Affecter le panier au client
+			client.setPanier(panier);
+			
+			//Créer une session
+			HttpSession session = req.getSession(true);
+			
+			//Placer le client dans la session
+			session.setAttribute("clientSession", client);
+			
+			//Récupération de la liste des catégories 
+			List<Categorie> listeCat = catService.getAllCategorieService();
+			model.addAttribute("cat_liste", listeCat);
+			
+			//Récupération de la liste des produits
+			List<Produit> listeProd = produitService.getAllProduitService();
+			model.addAttribute("prod_liste", listeProd);
+			
+			session.setAttribute("color", "green");
+			model.addAttribute("loginColor", session.getAttribute("color"));
+			model.addAttribute("nomClient", ((Client) session.getAttribute("clientSession")).getNom());
+			
+			return "c_accueil";
+				
+		}else{
+			
+			//Exception à ajouter mauvais identifiant
+			return "login";
+		}
+		
+	}
+	
 	@RequestMapping(value="/accueil", method=RequestMethod.GET)
-	public String accueilClient(ModelMap model){
+	public String accueilClient(ModelMap model, HttpServletRequest req){
 		//Récupération ou création d'un panier
 		if(panierService.isExistService()==0){
 			panier = new Panier();
@@ -93,12 +195,16 @@ public class ClientController {
 		List<Produit> listeProd = produitService.getAllProduitService();
 		model.addAttribute("prod_liste", listeProd);
 		
-		model.addAttribute("loginColor", "red");
+		HttpSession session = req.getSession();
+		
+		session.setAttribute("color", "green");
+		model.addAttribute("loginColor", session.getAttribute("color"));
+		model.addAttribute("nomClient", ((Client) session.getAttribute("clientSession")).getNom());
 		return "c_accueil";
 	}
 	
 	@RequestMapping(value="/catProduit/{nomCategorie}", method=RequestMethod.GET)
-	public String produitByCategorie(@PathVariable("nomCategorie") String nomCat, ModelMap model){
+	public String produitByCategorie(@PathVariable("nomCategorie") String nomCat, ModelMap model, HttpServletRequest req){
 		
 		//Récupération de la liste des catégories 
 		List<Categorie> listeCat = catService.getAllCategorieService();
@@ -109,24 +215,31 @@ public class ClientController {
 		
 		//récupération de la liste des produits par leur catégorie
 		List<Produit> listeProdByCat = produitService.getProduitByCategorieService(cat);
-		
 		model.addAttribute("prod_liste", listeProdByCat);
+		
+		//Récupérer la session
+		HttpSession session = req.getSession();
+		
+		session.setAttribute("color", "green");
+		model.addAttribute("loginColor", session.getAttribute("color"));
+		model.addAttribute("nomClient", ((Client) session.getAttribute("clientSession")).getNom());
 		
 		return "c_accueil";
 	}
 	
 	@RequestMapping(value="/panier", method=RequestMethod.GET)
-	public String panier(ModelMap model){
+	public String panier(ModelMap model, HttpServletRequest req){
 		Panier panier = panierService.getActivePanierService();
 		
 		List<LigneCommande> listeLC = LCService.getLCsByPanierService(panier);
 		model.addAttribute("liste", listeLC);
 		model.addAttribute("panierActif", panier);
+		
 		return "c_panier";
 	}
 
 	@RequestMapping(value="/addProd/{id_produit}",method=RequestMethod.GET)
-	public String addProduitInPanier(@PathVariable("id_produit") long produit_id, ModelMap model){
+	public String addProduitInPanier(@PathVariable("id_produit") long produit_id, ModelMap model, HttpServletRequest req){
 		//Récupération du produit par l'ID
 		Produit produit = produitService.getProduitByIdService(produit_id);
 		
@@ -194,6 +307,12 @@ public class ClientController {
 		model.addAttribute("prod_liste", listeProd);
 		
 		model.addAttribute("panierActif", panier);
+		
+		HttpSession session = req.getSession();
+		
+		session.setAttribute("color", "green");
+		model.addAttribute("loginColor", session.getAttribute("color"));
+		model.addAttribute("nomClient", ((Client) session.getAttribute("clientSession")).getNom());
 		
 		return"c_accueil";
 	
@@ -342,7 +461,13 @@ public class ClientController {
 	}
 
 	@RequestMapping(value="/panier/commander", method=RequestMethod.GET)
-	public String commander(ModelMap model){
+	public String commander(ModelMap model, HttpServletRequest req){
+		//Récupérer la session 
+		HttpSession session = req.getSession();
+		
+		//Récupérer le client dans la session
+		Client clientSession = (Client) session.getAttribute("clientSession");
+		
 		//Récupérer le panier acitf
 		Panier panier = panierService.getActivePanierService();
 		
@@ -364,11 +489,40 @@ public class ClientController {
 		model.addAttribute("liste", listeLC);
 		model.addAttribute("panierActif", panier);
 		model.addAttribute("commande", commande);
+		model.addAttribute("client", clientSession);
 		
 		return "c_commande";
 	}
 
-
+	@RequestMapping(value="/logout", method=RequestMethod.GET)
+	public String deconexion(ModelMap model, HttpServletRequest req){
+		//Récupérer la session
+		HttpSession session = req.getSession();
+		
+		//Récupérer le panier actif
+		panier = panierService.getActivePanierService();
+		
+		//Supprimer le panier 
+		panierService.deletePanierService(panier.getId_panier());
+		
+		//Créer un nouveau panier actif
+		Panier panier2 = new Panier(0, 0, true);
+		
+		//Ajouter le panier actif au model
+		model.addAttribute("panierActif", panier2);
+		
+		//Récupération de la liste des catégories 
+		List<Categorie> listeCat = catService.getAllCategorieService();
+		model.addAttribute("cat_liste", listeCat);
+		
+		//Récupération de la liste des produits
+		List<Produit> listeProd = produitService.getAllProduitService();
+		model.addAttribute("prod_liste", listeProd);
+		
+		session.invalidate();
+		
+		return "c_accueil";
+	}
 }
 //----------------------------------------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------------------

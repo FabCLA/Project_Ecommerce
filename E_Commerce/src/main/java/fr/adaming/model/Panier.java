@@ -45,7 +45,7 @@ public class Panier implements Serializable{
 		@JoinColumn(name="client_id",referencedColumnName="id_client")
 		private Client clientP;
 		
-		@OneToMany(mappedBy="panier")
+		@OneToMany(mappedBy="panier",cascade=CascadeType.REMOVE)
 		private List<LigneCommande> listeLC;
 		
 		@OneToOne(mappedBy="panier")
