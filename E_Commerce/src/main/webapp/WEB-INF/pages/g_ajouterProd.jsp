@@ -98,16 +98,16 @@ div.container {
 
 
 	<ul class="verti">
-		<li class="verti"><a href="gestAccueil">Produits</a></li>
+		<li class="verti"><a href="${pageContext.request.contextPath}/gestionnaire/gestAccueil">Produits</a></li>
 		<li class="verti"><a href="#gestCategorie">Catégories</a></li>
 		<li class="verti"><a href="#gestClient">Clients</a></li>
 		<li class="verti"><a class="active" href="#gestDeconnection">Déconnection</a></li>
 	</ul>
 
 	<ul class="horiz1">
-		<li class="horiz1"><a class="active" href="formAjProdGest">Ajouter</a></li>
-		<li class="horiz1"><a href="gestUpDProd">Modifier</a></li>
-		<li class="horiz1"><a href="formDelProdGest">Supprimer</a></li>
+		<li class="horiz1"><a class="active" href="${pageContext.request.contextPath}/gestionnaire/formAjProdGest">Ajouter</a></li>
+		<li class="horiz1"><a href="${pageContext.request.contextPath}/gestionnaire/formModif1">Modifier</a></li>
+		<li class="horiz1"><a href="${pageContext.request.contextPath}/gestionnaire/formDelProdGest">Supprimer</a></li>
 	</ul>
 
 	<div class="container">

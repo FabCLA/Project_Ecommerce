@@ -76,35 +76,19 @@ li.verti a.active {
 }
 
 /************************************/
-
 li.verti a:hover:not (.active ) {
 	background-color: #555;
 	color: white;
 }
+
 li.horiz1 a:hover {
 	background-color: #111;
 }
 
-li.verti a:hover {
-	background-color: lightgray;
-}
-
-table {
-	font-family: arial, sans-serif;
-	border-collapse: collapse;
+div.container {
 	width: 78%;
 	float: right;
-	margin: 11px;
-}
-
-td, th {
-	border: 1px solid #dddddd;
-	text-align: left;
-	padding: 8px;
-}
-
-tr:nth-child(even) {
-	background-color: #dddddd;
+	margin-top: 40px;
 }
 </style>
 
@@ -121,44 +105,29 @@ tr:nth-child(even) {
 	</ul>
 
 	<ul class="horiz1">
-		<li class="horiz1"><a class="active" href="${pageContext.request.contextPath}/gestionnaire/formAjProdGest">Ajouter</a></li>
+		<li class="horiz1"><a class="active" href="${pageContext.request.contextPath}/gestionnaire/formAjCatGest">Ajouter</a></li>
 		<li class="horiz1"><a href="${pageContext.request.contextPath}/gestionnaire/formModif1">Modifier</a></li>
 		<li class="horiz1"><a href="${pageContext.request.contextPath}/gestionnaire/formDelProdGest">Supprimer</a></li>
 	</ul>
 
-	<div>
-
-		<table>
-
-			<tr bgcolor="grey" style="color: white">
-				<th>Id</th>
-				<th>Nom</th>
-				<th>Description</th>
-				<th>Prix</th>
-				<th>Quantite</th>
-				<th>Catégorie</th>
-				<th>Actions</th>
-			</tr>
-
-			<c:forEach var="prod" items="${listeProd}">
-				<tr>
-					<td>${prod.id_produit}</td>
-					<td>${prod.nom}</td>
-					<td>${prod.description}</td>
-					<td>${prod.prix}</td>
-					<td>${prod.quantite}</td>
-					<td>${prod.categorie.nom}</td>
-					<td>
-						<form action="${pageContext.request.contextPath}/gestionnaire/gestDeleteProd/${prod.id_produit}" method="get">							
-								<button type="submit" class="btn btn-primary">Supprimer</button>							
-						</form>						
-					</td>	
-				</tr>
-			</c:forEach>
-
-		</table>
-
+	<div class="container">
+		<form class="form-horizontal" method="post" action="gestAddCat"
+			modelAttribute="categorie">
+			<div class="form-group">
+				<label class="control-label col-sm-3" for="nom">Nom:</label>
+				<div class="col-sm-7">
+					<input class="form-control" id="nom" placeholder="Categorie"
+						name="nom">
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-offset-3 col-sm-7">
+					<button type="submit" class="btn btn-primary">Ajouter</button>
+				</div>
+			</div>
+		</form>
 	</div>
+
 
 </body>
 </html>

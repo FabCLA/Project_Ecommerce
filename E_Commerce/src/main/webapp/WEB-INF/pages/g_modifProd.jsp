@@ -2,6 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -76,11 +77,77 @@ li.verti a.active {
 }
 
 /************************************/
-li.verti a:hover:not (.active ) {
-	background-color: #555;
-	color: white;
-}
+li
 
+
+
+
+.verti
+
+
+ 
+
+
+a
+
+
+
+
+:hover
+
+
+
+
+:not
+
+
+ 
+
+
+(
+.active
+
+
+ 
+
+
+)
+{
+background-color
+
+
+
+
+:
+
+
+ 
+
+
+#555
+
+
+
+
+;
+color
+
+
+
+
+:
+
+
+ 
+
+
+white
+
+
+
+
+;
+}
 li.horiz1 a:hover {
 	background-color: #111;
 }
@@ -98,61 +165,75 @@ div.container {
 
 
 	<ul class="verti">
-		<li class="verti"><a href="gestAccueil">Produits</a></li>
+		<li class="verti"><a
+			href="${pageContext.request.contextPath}/gestionnaire/gestAccueil">Produits</a></li>
 		<li class="verti"><a href="#gestCategorie">Catégories</a></li>
 		<li class="verti"><a href="#gestClient">Clients</a></li>
 		<li class="verti"><a class="active" href="#gestDeconnection">Déconnection</a></li>
 	</ul>
 
 	<ul class="horiz1">
-		<li class="horiz1"><a class="active" href="gestAddProd">Ajouter</a></li>
-		<li class="horiz1"><a href="gestUpDProd">Modifier</a></li>
-		<li class="horiz1"><a href="#suppProd">Supprimer</a></li>
+		<li class="horiz1"><a class="active"
+			href="${pageContext.request.contextPath}/gestionnaire/formAjProdGest">Ajouter</a></li>
+		<li class="horiz1"><a
+			href="${pageContext.request.contextPath}/gestionnaire/formModif1">Modifier</a></li>
+		<li class="horiz1"><a
+			href="${pageContext.request.contextPath}/gestionnaire/formDelProdGest">Supprimer</a></li>
 	</ul>
 
 	<div class="container">
-		<form class="form-horizontal" method="post" action="gestAddProd"
-			modelAttribute="produit">
+		<form class="form-horizontal" method="post"
+			action="gestModifProd" modelAttribute="prodAModif">
 			<div class="form-group">
-				<label class="control-label col-sm-3" for="nom">Nom:</label>
 				<div class="col-sm-7">
-					<input class="form-control" id="nom" placeholder="Produit" name="nom">
+					<input type="hidden" path="id_produit">
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="control-label col-sm-3" for="descr">Description:</label>
+				<label class="control-label col-sm-3" for="nom" path="nom">Nom:</label>
+				<div class="col-sm-7">
+					<input class="form-control" id="nom" placeholder="Produit"
+						name="nom" value="${prodAModif.nom}" path="nom">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-3" for="descr"
+					path="description">Description:</label>
 				<div class="col-sm-7">
 					<textarea class="form-control" rows="5" id="descr"
-						placeholder="Description" name="description"></textarea>
+						placeholder="Description" name="description" path="description">${prodAModif.description}</textarea>
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="control-label col-sm-3" for="prix">Prix:</label>
+				<label class="control-label col-sm-3" for="prix" path="prix">Prix:</label>
 				<div class="col-sm-7">
-					<input class="form-control" id="prix" placeholder="Prix en euros" name="prix">
+					<input class="form-control" id="prix"
+						placeholder="Prix en euros" name="prix" value="${prodAModif.prix}"
+						path="prix">
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="control-label col-sm-3" for="qte">Quantité:</label>
+				<label class="control-label col-sm-3" for="qte" path="quantite">Quantité:</label>
 				<div class="col-sm-7">
-					<input class="form-control" id="qte" placeholder="Quantité" name="quantite">
+					<input class="form-control" id="qte" placeholder="Quantité"
+						name="quantite" value="${prodAModif.quantite}" path="quantite">
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="control-label col-sm-3" for="nomCat">Catégorie</label>
+				<label class="control-label col-sm-3" for="nomCat"
+					path="categorie">Catégorie</label>
 				<div class="col-sm-7">
 					<select class="form-control" id="nomCat" name="categorie">
 						<c:forEach var="categories" items="${categorieList}">
-							<option>${categories.nom}</option>
+							<option path="categorie">${categories.nom}</option>
 						</c:forEach>
 					</select>
 				</div>
 				<br>
-
 			</div>
 			<div class="form-group">
 				<div class="col-sm-offset-3 col-sm-7">
-					<button type="submit" class="btn btn-primary">Ajouter</button>
+					<button type="submit" class="btn btn-primary">Modifier</button>
 				</div>
 			</div>
 		</form>

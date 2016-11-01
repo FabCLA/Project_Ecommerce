@@ -123,36 +123,29 @@ tr:nth-child(even) {
 	<ul class="horiz1">
 		<li class="horiz1"><a class="active" href="${pageContext.request.contextPath}/gestionnaire/formAjProdGest">Ajouter</a></li>
 		<li class="horiz1"><a href="${pageContext.request.contextPath}/gestionnaire/formModif1">Modifier</a></li>
-		<li class="horiz1"><a href="${pageContext.request.contextPath}/gestionnaire/formDelProdGest">Supprimer</a></li>
+		<li class="horiz1"><a href="${pageContext.request.contextPath}/gestionnaire/formDelCatGest">Supprimer</a></li>
 	</ul>
 
 	<div>
+
 
 		<table>
 
 			<tr bgcolor="grey" style="color: white">
 				<th>Id</th>
-				<th>Nom</th>
-				<th>Description</th>
-				<th>Prix</th>
-				<th>Quantite</th>
-				<th>Catégorie</th>
+				<th>Catégories</th>
 				<th>Actions</th>
 			</tr>
 
-			<c:forEach var="prod" items="${listeProd}">
+			<c:forEach var="cat" items="${listeCat}">
 				<tr>
-					<td>${prod.id_produit}</td>
-					<td>${prod.nom}</td>
-					<td>${prod.description}</td>
-					<td>${prod.prix}</td>
-					<td>${prod.quantite}</td>
-					<td>${prod.categorie.nom}</td>
+					<td>${cat.id_categorie}</td>
+					<td>${cat.nom}</td>
 					<td>
-						<form action="${pageContext.request.contextPath}/gestionnaire/gestDeleteProd/${prod.id_produit}" method="get">							
+						<form action="${pageContext.request.contextPath}/gestionnaire/gestDeleteCat/${cat.id_categorie}" method="get">							
 								<button type="submit" class="btn btn-primary">Supprimer</button>							
 						</form>						
-					</td>	
+					</td>
 				</tr>
 			</c:forEach>
 

@@ -32,7 +32,7 @@ public class Categorie implements Serializable{
 	 */
 		@Id
 		@GeneratedValue(strategy=GenerationType.IDENTITY)
-		private int id_categorie;
+		private long id_categorie;
 		
 		private String nom;
 		
@@ -62,7 +62,7 @@ public class Categorie implements Serializable{
 		 * @param nom
 		 * @param listeProduit
 		 */
-		public Categorie(int id_categorie, String nom) {
+		public Categorie(long id_categorie, String nom) {
 			super();
 			this.id_categorie = id_categorie;
 			this.nom = nom;
@@ -75,7 +75,7 @@ public class Categorie implements Serializable{
 		/**
 		 * @return the id_categorie
 		 */
-		public int getId_categorie() {
+		public long getId_categorie() {
 			return id_categorie;
 		}
 		/**

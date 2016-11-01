@@ -149,8 +149,8 @@ tr:nth-child(even) {
 					<td>${prod.quantite}</td>
 					<td>${prod.categorie.nom}</td>
 					<td>
-						<form action="${pageContext.request.contextPath}/gestionnaire/gestDeleteProd/${prod.id_produit}" method="get">							
-								<button type="submit" class="btn btn-primary">Supprimer</button>							
+						<form action="${pageContext.request.contextPath}/gestionnaire/formModifProd/${prod.id_produit}" method="get">							
+								<button type="submit" class="btn btn-primary">Modifier</button>							
 						</form>						
 					</td>	
 				</tr>

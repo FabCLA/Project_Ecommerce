@@ -76,35 +76,17 @@ li.verti a.active {
 }
 
 /************************************/
-li
-.verti
- 
-a
-:hover
-:not
- 
-(
-.active
- 
-)
-{
-background-color
-:
- 
-#555
-;
 
-	
-color
-:
- 
-white
-;
-
-
+li.verti a:hover:not (.active ) {
+	background-color: #555;
+	color: white;
 }
 li.horiz1 a:hover {
 	background-color: #111;
+}
+
+li.verti a:hover {
+	background-color: lightgray;
 }
 
 table {
@@ -132,16 +114,16 @@ tr:nth-child(even) {
 
 
 	<ul class="verti">
-		<li class="verti"><a href="/gestAccueil">Produits</a></li>
-		<li class="verti"><a href="#gestCategorie">Catégories</a></li>
+		<li class="verti"><a href="${pageContext.request.contextPath}/gestionnaire/gestAccueil">Produits</a></li>
+		<li class="verti"><a href="${pageContext.request.contextPath}/gestionnaire/gestCategories">Catégories</a></li>
 		<li class="verti"><a href="#gestClient">Clients</a></li>
 		<li class="verti"><a class="active" href="#gestDeconnection">Déconnection</a></li>
 	</ul>
 
 	<ul class="horiz1">
-		<li class="horiz1"><a class="active" href="formAjProdGest">Ajouter</a></li>
-		<li class="horiz1"><a href="#upDProd">Modifier</a></li>
-		<li class="horiz1"><a href="formDelProdGest">Supprimer</a></li>
+		<li class="horiz1"><a class="active" href="${pageContext.request.contextPath}/gestionnaire/formAjProdGest">Ajouter</a></li>
+		<li class="horiz1"><a href="${pageContext.request.contextPath}/gestionnaire/formModif1">Modifier</a></li>
+		<li class="horiz1"><a href="${pageContext.request.contextPath}/gestionnaire/formDelProdGest">Supprimer</a></li>
 	</ul>
 
 	<div>
@@ -154,9 +136,7 @@ tr:nth-child(even) {
 				<th>Description</th>
 				<th>Prix</th>
 				<th>Quantite</th>
-				<th>Selection</th>
 				<th>Catégorie</th>
-				<th>Actions</th>
 			</tr>
 
 			<c:forEach var="prod" items="${listeProd}">
@@ -166,13 +146,8 @@ tr:nth-child(even) {
 					<td>${prod.description}</td>
 					<td>${prod.prix}</td>
 					<td>${prod.quantite}</td>
-					<td>${prod.selection}</td>
 					<td>${prod.categorie.nom}</td>
-					<td>
-						<form action="gestDeleteProd/${prod.id_produit}" method="get">							
-								<button type="submit" class="btn btn-primary">Supprimer</button>							
-						</form>
-					</td>
+					
 				</tr>
 			</c:forEach>
 

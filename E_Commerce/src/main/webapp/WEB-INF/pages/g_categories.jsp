@@ -115,15 +115,15 @@ tr:nth-child(even) {
 
 	<ul class="verti">
 		<li class="verti"><a href="${pageContext.request.contextPath}/gestionnaire/gestAccueil">Produits</a></li>
-		<li class="verti"><a href="#gestCategorie">Catégories</a></li>
+		<li class="verti"><a href="${pageContext.request.contextPath}/gestionnaire/gestCategories">Catégories</a></li>
 		<li class="verti"><a href="#gestClient">Clients</a></li>
 		<li class="verti"><a class="active" href="#gestDeconnection">Déconnection</a></li>
 	</ul>
 
 	<ul class="horiz1">
-		<li class="horiz1"><a class="active" href="${pageContext.request.contextPath}/gestionnaire/formAjProdGest">Ajouter</a></li>
+		<li class="horiz1"><a class="active" href="${pageContext.request.contextPath}/gestionnaire/formAjCatGest">Ajouter</a></li>
 		<li class="horiz1"><a href="${pageContext.request.contextPath}/gestionnaire/formModif1">Modifier</a></li>
-		<li class="horiz1"><a href="${pageContext.request.contextPath}/gestionnaire/formDelProdGest">Supprimer</a></li>
+		<li class="horiz1"><a href="${pageContext.request.contextPath}/gestionnaire/formDelCatGest">Supprimer</a></li>
 	</ul>
 
 	<div>
@@ -132,27 +132,14 @@ tr:nth-child(even) {
 
 			<tr bgcolor="grey" style="color: white">
 				<th>Id</th>
-				<th>Nom</th>
-				<th>Description</th>
-				<th>Prix</th>
-				<th>Quantite</th>
-				<th>Catégorie</th>
-				<th>Actions</th>
+				<th>Catégories</th>
 			</tr>
 
-			<c:forEach var="prod" items="${listeProd}">
+			<c:forEach var="cat" items="${listeCat}">
 				<tr>
-					<td>${prod.id_produit}</td>
-					<td>${prod.nom}</td>
-					<td>${prod.description}</td>
-					<td>${prod.prix}</td>
-					<td>${prod.quantite}</td>
-					<td>${prod.categorie.nom}</td>
-					<td>
-						<form action="${pageContext.request.contextPath}/gestionnaire/gestDeleteProd/${prod.id_produit}" method="get">							
-								<button type="submit" class="btn btn-primary">Supprimer</button>							
-						</form>						
-					</td>	
+					<td>${cat.id_categorie}</td>
+					<td>${cat.nom}</td>
+					
 				</tr>
 			</c:forEach>
 
