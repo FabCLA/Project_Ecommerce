@@ -108,9 +108,10 @@ th {
 	<!-- 	Bouton login -->
 
 			<a
-				style="background-color: silver; color: white; padding: 14px 25px; text-align: center; display: inline-block; float: right; border: 1px solid gray;">
+				style="background-color: silver; color: white; padding: 14px 25px; text-align: center; display: inline-block; float: right; border: 1px solid gray;"
+				href="${pageContext.request.contextPath}/index/login">
 				<div>
-					<i class="glyphicon glyphicon-user"></i>
+					<i style="color: ${loginColor};" class="glyphicon glyphicon-user"></i>
 				</div> <span class="bold">Login</span>
 			</a>
 		
@@ -129,7 +130,7 @@ th {
 	<ul>
 		<li><a class="active"
 			href="${pageContext.request.contextPath}/index/accueil"><h3
-					style="font-weight: bold;">Catégorie</h3></a></li>
+					style="font-weight: bold;">E-Commerce</h3></a></li>
 		<c:forEach var="cat" items="${cat_liste}">
 
 			<li><a
@@ -158,7 +159,7 @@ th {
 					<td>${prod.prix} <i class="glyphicon glyphicon-eur"></i></td>
 					<td>${prod.quantite}</td>
 					<td>
-						<a href="${pageContext.request.contextPath}/index/addProd/${prod.id_produit}">
+						<a  href="${pageContext.request.contextPath}/index/addProd/${prod.id_produit}">
 								<i class="glyphicon glyphicon-shopping-cart"></i>
 							</div>
 					</a></td>
@@ -167,10 +168,6 @@ th {
 		</table>
 	</div>
 	<!-- ============================================================================ -->
-<script>
-	$(document).ready(function(){
-	    $('[data-toggle="popover"]').popover();   
-	});
-</script>
+
 </body>
 </html>

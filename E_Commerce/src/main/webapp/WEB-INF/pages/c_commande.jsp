@@ -18,63 +18,13 @@
 	rel="stylesheet">
 <script src="<c:url value="/resources/javascript/bootstrap.min.js" />"></script>
 
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <style>
 body {
 	margin: 0;
 }
 
-ul {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-	width: 15%;
-	background-color: #f1f1f1;
-	position: fixed;
-	height: 100%;
-	overflow: auto;
-}
-
-li a {
-	display: block;
-	color: #000;
-	padding: 8px 16px;
-	text-decoration: none;
-}
-
-li a.active {
-	background-color: #4CAF50;
-	color: white;
-}
-
-li
-
-a
-
-:hover
-
-:not
-
-(
-.active
-
-)
-{
-background-color
-
-:
-#555
-
-;
-color
-
-:
-
-white
-
-;
-}
 table {
 	margin-left: 17%;
 	border-collapse: collapse;
@@ -94,24 +44,17 @@ th {
 	background-color: #4CAF50;
 	color: white;
 }
+
 </style>
-<title>Panier</title>
+
+<title>Commande</title>
 </head>
 <body>
-
-	<ul>
-		<li><a class="active"
-			href="${pageContext.request.contextPath}/index/accueil"><h3
-					style="font-weight: bold;">E-Commerce</h3></a></li>
-		<li><a href="${pageContext.request.contextPath}/index/panier/commander">Commander</a>
-		<li><a href="${pageContext.request.contextPath}/index/panier/deletePanier">Supprimer panier</a>
-	</ul>
-
 	<!-- ===================================Corps==================================== -->
 	<br/>
 	<h2 style="font-weight: bold;" align="center">Votre panier</h2>
 	<div style="width: 75%; padding: 15px; margin-left: 2%;">
-		<table style="border: 1px solid green">
+		<table>
 			<tr>
 				<th style="font-weight: bold;">Produit</th>
 				<th style="font-weight: bold;">Quantité</th>
@@ -119,23 +62,10 @@ th {
 				<th></th>
 			</tr>
 			<c:forEach var="liste" items="${liste}">
-				<tr style="border: 1px solid green">
+				<tr>
 					<td><h4 style="font-weight: bold;">${liste.produit.nom}</h4></td>
-					<td>${liste.quantite}
-						<a href="${pageContext.request.contextPath}/index/panier/plus/${liste.produit.id_produit}">
-						<i class="glyphicon glyphicon-plus"></i>
-						</a> 
-						
-						<a href="${pageContext.request.contextPath}/index/panier/moins/${liste.produit.id_produit}">
-						<i class="glyphicon glyphicon-minus"></i>
-						</a>
-					</td>
+					<td>${liste.quantite}</td>
 					<td style="font-weight: bold;">${liste.prix}<i class="glyphicon glyphicon-eur"></i></td>
-					<td>
-						<a href="${pageContext.request.contextPath}/index/panier/delete/${liste.produit.id_produit}">
-						<i class="glyphicon glyphicon-remove"></i>
-						</a>
-					</td>
 				</tr>
 			</c:forEach>
 			<tr style="border: 2px solid black">

@@ -41,11 +41,11 @@ public class Produit implements Serializable{
 		private int quantite;
 		private boolean selection;
 		
-		@ManyToOne(cascade=CascadeType.ALL)
+		@ManyToOne(cascade=CascadeType.MERGE)
 		@JoinColumn(name="categorie_id", referencedColumnName="id_categorie")
 		private Categorie categorie;
 		
-		@OneToOne(mappedBy="produit")
+		@OneToOne(mappedBy="produit", cascade=CascadeType.REMOVE)
 		private LigneCommande ligneC;
 //-------------------------------------------------------------------------------------------------------------
 //------------------------------2_Les constructeurs------------------------------------------------------------	

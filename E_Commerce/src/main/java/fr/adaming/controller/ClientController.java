@@ -6,6 +6,7 @@
  */
 package fr.adaming.controller;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import fr.adaming.model.Categorie;
+import fr.adaming.model.Commande;
 import fr.adaming.model.LigneCommande;
 import fr.adaming.model.Panier;
 import fr.adaming.model.Produit;
@@ -62,6 +64,12 @@ public class ClientController {
 	/**
 	 * 4_Méthodes
 	 */
+	@RequestMapping(value="/login",method=RequestMethod.GET)
+	public String login(ModelMap model){
+		
+		return "login";
+	}
+	
 	@RequestMapping(value="/accueil", method=RequestMethod.GET)
 	public String accueilClient(ModelMap model){
 		//Récupération ou création d'un panier
@@ -85,6 +93,7 @@ public class ClientController {
 		List<Produit> listeProd = produitService.getAllProduitService();
 		model.addAttribute("prod_liste", listeProd);
 		
+		model.addAttribute("loginColor", "red");
 		return "c_accueil";
 	}
 	
@@ -331,6 +340,35 @@ public class ClientController {
 		
 		return "c_panier";
 	}
+
+	@RequestMapping(value="/panier/commander", method=RequestMethod.GET)
+	public String commander(ModelMap model){
+		//Récupérer le panier acitf
+		Panier panier = panierService.getActivePanierService();
+		
+		//Créer la commande en local
+		Commande commande = new Commande();
+		commande.setPanier(panier);
+		
+		//Récupérer la date
+		Date date= new Date();
+		int year = date.getYear();
+		int month = date.getMonth();
+		int day = date.getDay();
+		
+		//Set la date de la commande
+		commande.setDate_commande(new Date(year, month, day));
+		
+		List<LigneCommande> listeLC = LCService.getLCsByPanierService(panier);
+		
+		model.addAttribute("liste", listeLC);
+		model.addAttribute("panierActif", panier);
+		model.addAttribute("commande", commande);
+		
+		return "c_commande";
+	}
+
+
 }
 //----------------------------------------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------------------
