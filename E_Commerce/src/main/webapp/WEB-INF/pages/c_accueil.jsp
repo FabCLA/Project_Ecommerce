@@ -111,7 +111,7 @@ th {
 			style="background-color: silver;; color: white; padding: 14px 25px; text-align: center; display: inline-block; float: right; border: 1px solid gray;"
 			href="${pageContext.request.contextPath}/gestionnaire/login">
 			<div>
-				<i class="glyphicon glyphicon-sunglasses"></i>
+				<i class=" glyphicon glyphicon-briefcase"></i>
 			</div> <span class="bold">Gestion</span> 
 		</a>
 	<!-- 	Bouton login -->
