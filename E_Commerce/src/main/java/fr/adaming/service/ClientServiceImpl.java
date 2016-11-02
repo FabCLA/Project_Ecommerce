@@ -68,6 +68,10 @@ public class ClientServiceImpl implements IClientService{
 		
 		return clientDao.getClientByIdentifiantDao(mail, password);
 	}
+	
+	public Client getClientByIdService(long id_client){
+		return clientDao.getClientByIdDao(id_client);
+	}
 //----------------------------------------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------------------
 

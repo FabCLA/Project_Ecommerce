@@ -10,7 +10,7 @@
 <script src="<c:url value="/resources/javascript/bootstrap.min.js" />"></script>
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Modifier un produit</title>
+<title>Commandes d'un client</title>
 
 <style>
 body {
@@ -115,15 +115,13 @@ tr:nth-child(even) {
 
 	<ul class="verti">
 		<li class="verti"><a href="${pageContext.request.contextPath}/gestionnaire/gestAccueil">Produits</a></li>
-		<li class="verti"><a href="#gestCategorie">Catégories</a></li>
-		<li class="verti"><a href="#gestClient">Clients</a></li>
+		<li class="verti"><a href="${pageContext.request.contextPath}/gestionnaire/gestCategories">Catégories</a></li>
+		<li class="verti"><a href="${pageContext.request.contextPath}/gestionnaire/gestClients">Clients</a></li>
 		<li class="verti"><a class="active" href="#gestDeconnection">Déconnection</a></li>
 	</ul>
 
 	<ul class="horiz1">
-		<li class="horiz1"><a class="active" href="${pageContext.request.contextPath}/gestionnaire/formAjProdGest">Ajouter</a></li>
-		<li class="horiz1"><a href="${pageContext.request.contextPath}/gestionnaire/formModif1">Modifier</a></li>
-		<li class="horiz1"><a href="${pageContext.request.contextPath}/gestionnaire/formDelProdGest">Supprimer</a></li>
+		<li class="horiz1"><a href="${pageContext.request.contextPath}/gestionnaire/formDelClientGest">Supprimer</a></li>
 	</ul>
 
 	<div>
@@ -132,30 +130,22 @@ tr:nth-child(even) {
 
 			<tr bgcolor="grey" style="color: white">
 				<th>Id</th>
-				<th>Nom</th>
-				<th>Description</th>
-				<th>Prix</th>
-				<th>Quantite</th>
-				<th>Catégorie</th>
-				<th>Actions</th>
+				<th>Date de la commande</th>
+				<th>Aller aux</th>
 			</tr>
 
-			<c:forEach var="prod" items="${listeProd}">
+			<c:forEach var="commandClient" items="${listeCommandClient}">
 				<tr>
-					<td>${prod.id_produit}</td>
-					<td>${prod.nom}</td>
-					<td>${prod.description}</td>
-					<td>${prod.prix}</td>
-					<td>${prod.quantite}</td>
-					<td>${prod.categorie.nom}</td>
+					<td>${commandClient.id_commande}</td>
+					<td>${commandClient.date_commande}</td>
 					<td>
-						<form action="${pageContext.request.contextPath}/gestionnaire/formModifProd/${prod.id_produit}" method="get">							
-								<button type="submit" class="btn btn-primary">Modifier</button>							
+						<form action="${pageContext.request.contextPath}/gestionnaire/gestCommandClient/${commandClient.id_commande}" method="get">							
+								<button type="submit" class="btn btn-primary">Lignes de commande</button>							
 						</form>						
-					</td>	
+					</td>
 				</tr>
 			</c:forEach>
-
+			
 		</table>
 
 	</div>

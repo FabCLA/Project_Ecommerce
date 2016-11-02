@@ -10,7 +10,7 @@
 <script src="<c:url value="/resources/javascript/bootstrap.min.js" />"></script>
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Liste des catégories</title>
 
 <style>
 body {
@@ -116,7 +116,7 @@ tr:nth-child(even) {
 	<ul class="verti">
 		<li class="verti"><a href="${pageContext.request.contextPath}/gestionnaire/gestAccueil">Produits</a></li>
 		<li class="verti"><a href="${pageContext.request.contextPath}/gestionnaire/gestCategories">Catégories</a></li>
-		<li class="verti"><a href="#gestClient">Clients</a></li>
+		<li class="verti"><a href="${pageContext.request.contextPath}/gestionnaire/gestClients">Clients</a></li>
 		<li class="verti"><a class="active" href="#gestDeconnection">Déconnection</a></li>
 	</ul>
 

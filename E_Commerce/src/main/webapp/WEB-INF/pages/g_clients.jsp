@@ -10,7 +10,7 @@
 <script src="<c:url value="/resources/javascript/bootstrap.min.js" />"></script>
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Modifier un produit</title>
+<title>Liste des clients</title>
 
 <style>
 body {
@@ -115,15 +115,13 @@ tr:nth-child(even) {
 
 	<ul class="verti">
 		<li class="verti"><a href="${pageContext.request.contextPath}/gestionnaire/gestAccueil">Produits</a></li>
-		<li class="verti"><a href="#gestCategorie">Catégories</a></li>
-		<li class="verti"><a href="#gestClient">Clients</a></li>
+		<li class="verti"><a href="${pageContext.request.contextPath}/gestionnaire/gestCategories">Catégories</a></li>
+		<li class="verti"><a href="${pageContext.request.contextPath}/gestionnaire/gestClients">Clients</a></li>
 		<li class="verti"><a class="active" href="#gestDeconnection">Déconnection</a></li>
 	</ul>
 
 	<ul class="horiz1">
-		<li class="horiz1"><a class="active" href="${pageContext.request.contextPath}/gestionnaire/formAjProdGest">Ajouter</a></li>
-		<li class="horiz1"><a href="${pageContext.request.contextPath}/gestionnaire/formModif1">Modifier</a></li>
-		<li class="horiz1"><a href="${pageContext.request.contextPath}/gestionnaire/formDelProdGest">Supprimer</a></li>
+		<li class="horiz1"><a href="${pageContext.request.contextPath}/gestionnaire/formDelClientGest">Supprimer</a></li>
 	</ul>
 
 	<div>
@@ -133,29 +131,29 @@ tr:nth-child(even) {
 			<tr bgcolor="grey" style="color: white">
 				<th>Id</th>
 				<th>Nom</th>
-				<th>Description</th>
-				<th>Prix</th>
-				<th>Quantite</th>
-				<th>Catégorie</th>
-				<th>Actions</th>
+				<th>Adresse</th>
+				<th>Mail</th>
+				<th>Password</th>
+				<th>Tel</th>
+				<th>Aller aux</th>
 			</tr>
 
-			<c:forEach var="prod" items="${listeProd}">
+			<c:forEach var="client" items="${listeClient}">
 				<tr>
-					<td>${prod.id_produit}</td>
-					<td>${prod.nom}</td>
-					<td>${prod.description}</td>
-					<td>${prod.prix}</td>
-					<td>${prod.quantite}</td>
-					<td>${prod.categorie.nom}</td>
+					<td>${client.id_client}</td>
+					<td>${client.nom}</td>
+					<td>${client.adresse}</td>
+					<td>${client.mail}</td>
+					<td>${client.password}</td>
+					<td>${client.tel}</td>
 					<td>
-						<form action="${pageContext.request.contextPath}/gestionnaire/formModifProd/${prod.id_produit}" method="get">							
-								<button type="submit" class="btn btn-primary">Modifier</button>							
+						<form action="${pageContext.request.contextPath}/gestionnaire/gestCommandClient/${client.id_client}" method="get">							
+								<button type="submit" class="btn btn-primary">Commandes</button>							
 						</form>						
-					</td>	
+					</td>
 				</tr>
 			</c:forEach>
-
+			
 		</table>
 
 	</div>

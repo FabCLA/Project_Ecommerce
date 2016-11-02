@@ -38,6 +38,7 @@ public interface ILigneCommandeService {
 		public void updateLigneCService(LigneCommande LigneC);
 		public LigneCommande getLigneCByProduitService(Produit produit ,Panier panier);
 		public List<LigneCommande> getLCsByPanierService(Panier panier);
+		public List<LigneCommande> getLigneCByIdCommandeService(long id_commande);
 	//-------------------------------------------------------------------------------------------------------------
 	//-------------------------------------------------------------------------------------------------------------
 }

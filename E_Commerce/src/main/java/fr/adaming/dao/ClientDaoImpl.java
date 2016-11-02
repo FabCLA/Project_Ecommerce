@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import fr.adaming.model.Client;
+import fr.adaming.model.Produit;
 @Repository
 public class ClientDaoImpl implements IClientDao {
 //----------------------------------------------------------------------------------------------------------------
@@ -89,6 +90,16 @@ public class ClientDaoImpl implements IClientDao {
 		
 		query.setParameter("mailC", mail);
 		query.setParameter("passwordC", password);
+		
+		return (Client) query.uniqueResult();
+	}
+	
+	public Client getClientByIdDao(long id_client) {
+		Session s = sf.getCurrentSession();
+		String req ="FROM Client p WHERE p.id_client=:client_id";
+		Query query = s.createQuery(req);
+		
+		query.setParameter("client_id", id_client);
 		
 		return (Client) query.uniqueResult();
 	}

@@ -9,11 +9,13 @@ package fr.adaming.dao;
 import java.util.List;
 
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import fr.adaming.model.Commande;
 import fr.adaming.model.LigneCommande;
 import fr.adaming.model.Panier;
 import fr.adaming.model.Produit;
@@ -93,6 +95,20 @@ public class LigneCommandeDaoImpl implements ILigneCommandeDao {
 	}
 //----------------------------------------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------------------
+	@Override
+	public List<LigneCommande> getLigneCByIdCommandeDao(long id_commande) {
+		
+		Session s = sf.getCurrentSession();
+		
+		String reqSql="SELECT * FROM lignecommande WHERE commande_id=?";
+		SQLQuery querySql=s.createSQLQuery(reqSql);
+		querySql.addEntity(LigneCommande.class);
+		
+		querySql.setParameter(0, id_commande);
+		
+		return querySql.list();
+	
+	}
 
 
 
