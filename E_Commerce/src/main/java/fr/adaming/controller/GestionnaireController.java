@@ -43,6 +43,10 @@ public class GestionnaireController {
 	@Autowired
 	private ILigneCommandeService ligneCommandeService;
 	
+	
+	@Autowired
+	private IGestionnaireService getsionnaireService;
+	
 	//----------------------------------------------------------------------------------------------------------------
 	//---------------------------------1_Les propriétés (champs, attributs)-------------------------------------------
 		/**
@@ -63,6 +67,19 @@ public class GestionnaireController {
 		/**
 		 * 4_Méthodes
 		 */
+
+	
+//-------------------------------Identification gestionnaire-----------------------------------------	
+
+
+		@RequestMapping(value="/gestLogin", method=RequestMethod.GET)
+		public String identGest(ModelMap model){
+			List<Gestionnaire> liste = getsionnaireService.
+			model.addAttribute("listeProd", liste);
+			
+			return "g_accueil";
+		}
+	
 	
 //-------------------------------Tableau de Produits-----------------------------------------	
 	
