@@ -8,7 +8,7 @@
 </head>
 <body>
 <a href="index/accueil" class="btn btn-primary btn-lg disabled" role="button">Client</a>
-<a href="gestionnaire/gestAccueil" class="btn btn-default btn-lg disabled" role="button">Gestionnaire</a>
+<a href="gestionnaire/login" class="btn btn-default btn-lg disabled" role="button">Gestionnaire</a>
 
 </body>
 </html>

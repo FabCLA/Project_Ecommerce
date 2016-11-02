@@ -2,6 +2,8 @@ package fr.adaming.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -45,7 +47,7 @@ public class GestionnaireController {
 	
 	
 	@Autowired
-	private IGestionnaireService getsionnaireService;
+	private IGestionnaireService gestionnaireService;
 	
 	//----------------------------------------------------------------------------------------------------------------
 	//---------------------------------1_Les propriétés (champs, attributs)-------------------------------------------
@@ -72,13 +74,27 @@ public class GestionnaireController {
 //-------------------------------Identification gestionnaire-----------------------------------------	
 
 
-		@RequestMapping(value="/gestLogin", method=RequestMethod.GET)
+		@RequestMapping(value="/login", method=RequestMethod.GET)
 		public String identGest(ModelMap model){
-			List<Gestionnaire> liste = getsionnaireService.
-			model.addAttribute("listeProd", liste);
-			
-			return "g_accueil";
+
+			return "g_login";
 		}
+		
+		@RequestMapping(value="/findGest", method=RequestMethod.POST)
+		public String findGest(@ModelAttribute("gestionnaire") Gestionnaire gest, HttpServletRequest req, ModelMap model){
+			//Vérifier si le client exist
+			int i =gestionnaireService.isExistService(gest.getLogin(), gest.getMdp());
+			
+			if(i==1){
+				List<Produit> liste = prodService.getAllProduitService();
+				model.addAttribute("listeProd", liste);
+				
+				return "g_accueil";
+			}else{
+				return "g_login";
+			}
+		}
+		
 	
 	
 //-------------------------------Tableau de Produits-----------------------------------------	
