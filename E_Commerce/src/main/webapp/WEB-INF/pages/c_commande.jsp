@@ -144,6 +144,9 @@ th {
 			</tr>
 		</table>
 	</div>
+	<a style="margin-left:250px; background-color: #4CAF50; color: white; padding: 14px 25px; text-align: center; display: inline-block; border: 1px solid gray;"
+			href="validerCommande">Valider
+	</a>
 	<!-- ============================================================================ -->
 </body>
 </html>

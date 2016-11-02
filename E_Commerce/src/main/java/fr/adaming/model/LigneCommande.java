@@ -38,7 +38,7 @@ public class LigneCommande implements Serializable{
 		private int quantite;
 		private Double prix;
 		
-		@OneToOne(cascade=CascadeType.MERGE)
+		@ManyToOne(cascade=CascadeType.MERGE)
 		@JoinColumn(name="produit_id",referencedColumnName="id_produit")
 		private Produit produit;
 		

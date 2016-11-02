@@ -85,7 +85,12 @@ public class PanierDaoImpl implements IPanierDao {
 		if(liste.isEmpty()==true){
 			return 0;
 		}else{
+			Panier panier = this.getActivePanierDao();
+			if(panier==null){
+				return 0;
+			}else{
 			return 1;
+			}
 		}
 		
 	}

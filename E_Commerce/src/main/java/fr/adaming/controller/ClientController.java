@@ -28,6 +28,7 @@ import fr.adaming.model.Panier;
 import fr.adaming.model.Produit;
 import fr.adaming.service.ICategorieService;
 import fr.adaming.service.IClientService;
+import fr.adaming.service.ICommandeService;
 import fr.adaming.service.ILigneCommandeService;
 import fr.adaming.service.IPanierService;
 import fr.adaming.service.IProduitService;
@@ -54,6 +55,10 @@ public class ClientController {
 	
 	@Autowired
 	private IClientService clientService;
+	
+	@Autowired
+	private ICommandeService commandeService;
+	
 	private Panier panier;
 	
 //----------------------------------------------------------------------------------------------------------------
@@ -178,6 +183,7 @@ public class ClientController {
 		if(panierService.isExistService()==0){
 			panier = new Panier();
 			panier.setActive(true);
+			panier.setPrixTotal(0);
 			panier.setNbArticle(0);
 			panierService.addPanierService(panier);
 			panier = panierService.getActivePanierService();
@@ -195,11 +201,7 @@ public class ClientController {
 		List<Produit> listeProd = produitService.getAllProduitService();
 		model.addAttribute("prod_liste", listeProd);
 		
-		HttpSession session = req.getSession();
 		
-		session.setAttribute("color", "green");
-		model.addAttribute("loginColor", session.getAttribute("color"));
-		model.addAttribute("nomClient", ((Client) session.getAttribute("clientSession")).getNom());
 		return "c_accueil";
 	}
 	
@@ -312,7 +314,7 @@ public class ClientController {
 		
 		session.setAttribute("color", "green");
 		model.addAttribute("loginColor", session.getAttribute("color"));
-		model.addAttribute("nomClient", ((Client) session.getAttribute("clientSession")).getNom());
+
 		
 		return"c_accueil";
 	
@@ -486,6 +488,8 @@ public class ClientController {
 		
 		List<LigneCommande> listeLC = LCService.getLCsByPanierService(panier);
 		
+		session.setAttribute("commandeSession", commande);
+		
 		model.addAttribute("liste", listeLC);
 		model.addAttribute("panierActif", panier);
 		model.addAttribute("commande", commande);
@@ -522,6 +526,34 @@ public class ClientController {
 		session.invalidate();
 		
 		return "c_accueil";
+	}
+
+	@RequestMapping(value="/panier/validerCommande", method=RequestMethod.GET)
+	public String validerCommande(ModelMap model, HttpServletRequest req){
+		HttpSession session =req.getSession();
+		
+		Panier panier = panierService.getActivePanierService();
+		panier.setActive(false);
+		
+		Commande commande = (Commande) session.getAttribute("commandeSession");
+		
+		commande.setPanier(panier);
+		
+		panierService.updatePanierService(panier);
+		
+		commandeService.addCommandeService(commande);
+		
+		Panier panier2 = new Panier();
+		panier2.setActive(true);
+		panier2.setPrixTotal(0);
+		panier2.setNbArticle(0);
+		panierService.addPanierService(panier2);
+		
+		panier = panierService.getActivePanierService();
+		List<LigneCommande> listeLC = LCService.getLCsByPanierService(panier);
+		model.addAttribute("liste", listeLC);
+		model.addAttribute("panierActif", panier);
+		return "c_panier";
 	}
 }
 //----------------------------------------------------------------------------------------------------------------
