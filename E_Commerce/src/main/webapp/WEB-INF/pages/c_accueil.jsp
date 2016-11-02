@@ -105,6 +105,15 @@ th {
 </head>
 <body>
 	<!-- ==================================Header==================================== -->
+	<!-- 	Bouton panier -->
+	
+		<a
+			style="background-color: silver;; color: white; padding: 14px 25px; text-align: center; display: inline-block; float: right; border: 1px solid gray;"
+			href="${pageContext.request.contextPath}/gestionnaire/login">
+			<div>
+				<i class="glyphicon glyphicon-sunglasses"></i>
+			</div> <span class="bold">Gestion</span> 
+		</a>
 	<!-- 	Bouton login -->
 
 			<a

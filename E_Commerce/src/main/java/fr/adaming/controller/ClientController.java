@@ -6,6 +6,7 @@
  */
 package fr.adaming.controller;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -222,9 +223,6 @@ public class ClientController {
 		//Récupérer la session
 		HttpSession session = req.getSession();
 		
-		session.setAttribute("color", "green");
-		model.addAttribute("loginColor", session.getAttribute("color"));
-		model.addAttribute("nomClient", ((Client) session.getAttribute("clientSession")).getNom());
 		
 		return "c_accueil";
 	}
@@ -479,12 +477,11 @@ public class ClientController {
 		
 		//Récupérer la date
 		Date date= new Date();
-		int year = date.getYear();
-		int month = date.getMonth();
-		int day = date.getDay();
+		
+		Calendar c = Calendar.getInstance();
 		
 		//Set la date de la commande
-		commande.setDate_commande(new Date(year, month, day));
+		commande.setDate_commande(c.getTime());
 		
 		List<LigneCommande> listeLC = LCService.getLCsByPanierService(panier);
 		

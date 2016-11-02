@@ -113,6 +113,8 @@ th {
 	<br/>
 	<div style="width: 75%; padding: 15px; margin-left: 205px;">
 	<h2 style="font-weight: bold;" align="center">Votre Commande</h2>
+	<h4>Date : </h4>${commande.date_commande}
+	<br/>
 	<h4>Nom : </h4>${client.nom}
 	<br/>
 	<h4>Adresse : </h4>${client.adresse}
