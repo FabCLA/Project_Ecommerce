@@ -537,9 +537,6 @@ public class ClientController {
 		
 		commande.setClient(client);
 		
-
-		clientService.updateClientService(client);
-		
 		panierService.updatePanierService(panier);
 		
 		commandeService.addCommandeService(commande);
