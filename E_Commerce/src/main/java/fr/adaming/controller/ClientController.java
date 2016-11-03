@@ -533,8 +533,12 @@ public class ClientController {
 		panier.setActive(false);
 		
 		Commande commande = (Commande) session.getAttribute("commandeSession");
+		Client client = (Client) session.getAttribute("clientSession");
 		
-		commande.setPanier(panier);
+		commande.setClient(client);
+		
+
+		clientService.updateClientService(client);
 		
 		panierService.updatePanierService(panier);
 		
