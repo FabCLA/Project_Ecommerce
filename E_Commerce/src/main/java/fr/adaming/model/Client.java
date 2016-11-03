@@ -43,7 +43,7 @@ public class Client implements Serializable{
 		private String password;
 		private int tel;
 		
-		@OneToMany(mappedBy="client")
+		@OneToMany(mappedBy="client",cascade=CascadeType.REMOVE)
 		private List<Commande> listeCommandes;
 		
 		@OneToOne(mappedBy="clientP",cascade=CascadeType.REMOVE)
