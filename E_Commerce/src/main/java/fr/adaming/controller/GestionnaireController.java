@@ -94,7 +94,13 @@ public class GestionnaireController {
 				return "g_login";
 			}
 		}
-		
+
+//-------------------------------Logout gestionnaire-----------------------------------------	
+		@RequestMapping(value="/logout", method=RequestMethod.GET)
+		public String logoutGest(ModelMap model){
+
+			return "index";
+		}
 	
 	
 //-------------------------------Tableau de Produits-----------------------------------------	
@@ -334,7 +340,12 @@ public class GestionnaireController {
 			String nomCat=prod.getCategorie().getNom();
 			Categorie cat1=categorieService.getCategorieByNomService(nomCat);
 			prod.setCategorie(cat1);
-			prodService.updateProduitService(prod);
+			
+			Produit prod1=new Produit(prod.getNom(), prod.getDescription(), prod.getPrix(), prod.getQuantite(), prod.isSelection());
+			
+			prodService.deleteProduitService(prod.getId_produit());
+						
+			prodService.addProduitService(prod1);
 			
 			List<Produit> liste = prodService.getAllProduitService();
 			model.addAttribute("listeProd", liste);

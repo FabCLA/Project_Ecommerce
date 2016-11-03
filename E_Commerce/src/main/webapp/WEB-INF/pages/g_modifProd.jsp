@@ -165,11 +165,10 @@ div.container {
 
 
 	<ul class="verti">
-		<li class="verti"><a
-			href="${pageContext.request.contextPath}/gestionnaire/gestAccueil">Produits</a></li>
-		<li class="verti"><a href="#gestCategorie">Catégories</a></li>
-		<li class="verti"><a href="#gestClient">Clients</a></li>
-		<li class="verti"><a class="active" href="#gestDeconnection">Déconnection</a></li>
+		<li class="verti"><a href="${pageContext.request.contextPath}/gestionnaire/gestAccueil">Produits</a></li>
+		<li class="verti"><a href="${pageContext.request.contextPath}/gestionnaire/gestCategories">Catégories</a></li>
+		<li class="verti"><a href="${pageContext.request.contextPath}/gestionnaire/gestClients">Clients</a></li>
+		<li class="verti"><a class="active" href="${pageContext.request.contextPath}/index/accueil">Déconnection</a></li>
 	</ul>
 
 	<ul class="horiz1">

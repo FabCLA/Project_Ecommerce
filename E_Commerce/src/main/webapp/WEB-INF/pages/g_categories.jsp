@@ -117,12 +117,11 @@ tr:nth-child(even) {
 		<li class="verti"><a href="${pageContext.request.contextPath}/gestionnaire/gestAccueil">Produits</a></li>
 		<li class="verti"><a href="${pageContext.request.contextPath}/gestionnaire/gestCategories">Catégories</a></li>
 		<li class="verti"><a href="${pageContext.request.contextPath}/gestionnaire/gestClients">Clients</a></li>
-		<li class="verti"><a class="active" href="#gestDeconnection">Déconnection</a></li>
+		<li class="verti"><a class="active" href="${pageContext.request.contextPath}/index/accueil">Déconnection</a></li>
 	</ul>
 
 	<ul class="horiz1">
 		<li class="horiz1"><a class="active" href="${pageContext.request.contextPath}/gestionnaire/formAjCatGest">Ajouter</a></li>
-		<li class="horiz1"><a href="${pageContext.request.contextPath}/gestionnaire/formModif1">Modifier</a></li>
 		<li class="horiz1"><a href="${pageContext.request.contextPath}/gestionnaire/formDelCatGest">Supprimer</a></li>
 	</ul>
 
