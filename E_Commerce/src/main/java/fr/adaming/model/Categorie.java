@@ -36,7 +36,7 @@ public class Categorie implements Serializable{
 		
 		private String nom;
 		
-		@OneToMany(mappedBy="categorie", cascade=CascadeType.MERGE)
+		@OneToMany(mappedBy="categorie")
 		private List<Produit> listeProduit;
 //-------------------------------------------------------------------------------------------------------------
 //------------------------------2_Les constructeurs------------------------------------------------------------	
