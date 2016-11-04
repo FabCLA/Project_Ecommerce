@@ -22,11 +22,11 @@
 	<security:http>
 		<security:intercept-url pattern="/employe/*"
 			access="ROLE_ADMIN" />
+	
+		<security:form-login login-page="/index/login"
+			default-target-url="/index/accueil" authentication-failure-url="/index/fail" />
 
-		<security:form-login login-page="/login"
-			default-target-url="/employe/index" authentication-failure-url="/login" />
-
-		<security:logout logout-success-url="/logout" />
+		<security:logout logout-success-url="/index/logout" />
 	</security:http>
 
 	<!-- Configuration de l'autothentification -->

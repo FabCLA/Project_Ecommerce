@@ -182,7 +182,7 @@ div.container {
 
 	<div class="container">
 		<form class="form-horizontal" method="post"
-			action="gestModifProd" modelAttribute="prodAModif">
+			action="${pageContext.request.contextPath}/gestionnaire/gestModifProd"" modelAttribute="prodAModif">
 			<div class="form-group">
 				<div class="col-sm-7">
 					<input type="hidden" path="id_produit">

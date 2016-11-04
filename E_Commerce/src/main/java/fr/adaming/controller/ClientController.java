@@ -100,24 +100,6 @@ public class ClientController {
 		return "login";
 	}
 	
-	@RequestMapping(value="/modifier", method=RequestMethod.POST)
-	public String modifier(@ModelAttribute("client") Client cl, ModelMap model, HttpServletRequest req){
-		//Recupérer la session
-		HttpSession session = req.getSession();
-		Client client = (Client) session.getAttribute("clientSession");
-		
-		//modifier ses attributs
-		client.setNom(cl.getNom());
-		client.setAdresse(cl.getAdresse());
-		client.setMail(cl.getMail());
-		client.setPassword(cl.getPassword());
-		client.setTel(cl.getTel());
-		
-		clientService.updateClientService(client);
-		
-		return "c_modifClient";
-	}
-	
 	@RequestMapping(value="/modifClient", method=RequestMethod.GET)
 	public String modifClient(ModelMap model, HttpServletRequest req){
 		//Récupérer la session 
@@ -552,6 +534,39 @@ public class ClientController {
 		model.addAttribute("liste", listeLC);
 		model.addAttribute("panierActif", panier);
 		return "c_panier";
+	}
+	
+	@RequestMapping(value="/fail")
+	public String accesbloquee(ModelMap model){
+		
+		return "nonConnecte";
+	}
+	
+	@RequestMapping(value="/modifier", method=RequestMethod.POST)
+	public String modifier(@ModelAttribute("client") Client cl, ModelMap model, HttpServletRequest req){
+		//Recupérer la session
+		HttpSession session = req.getSession();
+		Client client = (Client) session.getAttribute("clientSession");
+		
+		Client client2 = clientService.getClientByIdentifiantService(client.getMail(), client.getPassword());
+		//modifier ses attributs
+//		client.setNom(cl.getNom());
+//		client.setAdresse(cl.getAdresse());
+//		client.setMail(cl.getMail());
+//		client.setPassword(cl.getPassword());
+//		client.setTel(cl.getTel());
+		System.out.println("======================== méthode modifier =====================");
+		System.out.println(client);
+		clientService.deleteClientService(client2.getId_client());
+		
+		clientService.addClientService(cl);
+		client = clientService.getClientByIdentifiantService(cl.getMail(), cl.getPassword());
+		
+		session.setAttribute("clientSession", client);
+		
+		//Ajouter le client de la session dans le model
+		model.addAttribute("clientS", session.getAttribute("clientSession"));
+		return "c_modifClient";
 	}
 }
 //----------------------------------------------------------------------------------------------------------------

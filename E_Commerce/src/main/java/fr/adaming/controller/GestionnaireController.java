@@ -73,7 +73,19 @@ public class GestionnaireController {
 	
 //-------------------------------Identification gestionnaire-----------------------------------------	
 
+	@RequestMapping(value = "/formModifProd/{ProduitID}", method = RequestMethod.GET)
+	public String initModifProdGest(@PathVariable("ProduitID") long id_produit, ModelMap model) {
+		
+		Produit prod=this.prodService.getProduitByIdService(id_produit);
+		model.addAttribute("prodAModif", prod);
 
+		List<Categorie> liste = categorieService.getAllCategorieService();			
+		model.addAttribute("categorieList", liste);
+
+		return "g_modifProd";
+		
+	}
+	
 		@RequestMapping(value="/login", method=RequestMethod.GET)
 		public String identGest(ModelMap model){
 
@@ -144,7 +156,27 @@ public class GestionnaireController {
 		
 //-------------------------------Tableau des Commandes d'un Client-----------------------------------------
 
+		@RequestMapping(value = "/gestModifProd", method =RequestMethod.POST)
+		public String modifProdGest(@ModelAttribute("prodAModif") Produit prod, ModelMap model) {
+			
+			String nomCat=prod.getCategorie().getNom();
+			Categorie cat1=categorieService.getCategorieByNomService(nomCat);
+			prod.setCategorie(cat1);
+			
+//			Produit prod1=new Produit(prod.getNom(), prod.getDescription(), prod.getPrix(), prod.getQuantite(), prod.isSelection());
+//			
+//			prodService.deleteProduitService(prod.getId_produit());
+//						
+//			prodService.addProduitService(prod1);
+			
+			prodService.updateProduitService(prod);
+			
+			List<Produit> liste = prodService.getAllProduitService();
+			model.addAttribute("listeProd", liste);
 
+			return "g_modifProd1";
+		
+		}
 		@RequestMapping(value = "/gestCommandClient/{ClientID}", method = RequestMethod.GET)
 		public String commandClient(@PathVariable("ClientID") long id_client, ModelMap model) {
 						
@@ -311,7 +343,7 @@ public class GestionnaireController {
 		
 //-------------------------------Modifier Produit-----------------------------------------		
 		
-		
+
 		
 		@RequestMapping(value="/formModif1", method=RequestMethod.GET)
 		public String modifGest(ModelMap model){
@@ -321,65 +353,12 @@ public class GestionnaireController {
 			return "g_modifProd1";
 		}
 		
-		@RequestMapping(value = "/formModifProd/{ProduitID}", method = RequestMethod.GET)
-		public String initModifProdGest(@PathVariable("ProduitID") long id_produit, ModelMap model) {
-			
-			Produit prod=this.prodService.getProduitByIdService(id_produit);
-			model.addAttribute("prodAModif", prod);
 
-			List<Categorie> liste = categorieService.getAllCategorieService();			
-			model.addAttribute("categorieList", liste);
+		
 
-			return "g_modifProd";
-			
-		}
 		
-		@RequestMapping(value = "/gestModifProd", method =RequestMethod.POST)
-		public String modifProdGest(@ModelAttribute("prodAModif") Produit prod, ModelMap model) {
-			
-			String nomCat=prod.getCategorie().getNom();
-			Categorie cat1=categorieService.getCategorieByNomService(nomCat);
-			prod.setCategorie(cat1);
-			
-			Produit prod1=new Produit(prod.getNom(), prod.getDescription(), prod.getPrix(), prod.getQuantite(), prod.isSelection());
-			
-			prodService.deleteProduitService(prod.getId_produit());
-						
-			prodService.addProduitService(prod1);
-			
-			List<Produit> liste = prodService.getAllProduitService();
-			model.addAttribute("listeProd", liste);
+		
 
-			return "g_modifProd";
-		
-		}
-		
-		
-//		@RequestMapping(value = "/gestModifProd", method = RequestMethod.POST)
-//		public String modifProdGest(@ModelAttribute("prodAModif") Produit prod, ModelMap model) {
-//			
-//			String nomCat=prod.getCategorie().getNom();
-//			Categorie cat1=categorieService.getCategorieByNomService(nomCat);
-//			prod.setCategorie(cat1);
-//			Produit prod1=prod;
-//			
-//			prodService.deleteProduitService(prod.getId_produit());
-//			prodService.addProduitService(prod1);
-//			
-//			List<Produit> liste = prodService.getAllProduitService();
-//			model.addAttribute("listeProd", liste);
-//
-//			return "g_modifProd";
-//
-//		}
-		
-		
-//		@RequestMapping(value = "/gestEditProd", method = RequestMethod.GET)
-//		public ModelAndView editerEmploye(long id_produit) {
-//			Produit p1 = this.prodService.getProduitByIdService(id_produit);
-//			String viewName = "g_modifProd";
-//			return new ModelAndView(viewName, "produit", p1);
-//		}
 		
 		
 	//----------------------------------------------------------------------------------------------------------------

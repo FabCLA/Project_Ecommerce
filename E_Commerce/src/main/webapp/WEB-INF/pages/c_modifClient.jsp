@@ -106,7 +106,7 @@ th {
 					style="font-weight: bold;">E-Commerce</h3></a>
 		</li>
 		<li><a
-				href="${pageContext.request.contextPath}/index/modifier/">Modifier</a>
+				href="${pageContext.request.contextPath}/index/modifClient/">Modifier</a>
 		</li>
 		<li><a
 				href="#">Déconnexion</a>
@@ -118,7 +118,8 @@ th {
 		style="margin-left: 250px; width: 70%; padding: 10px; border: 1px solid green; border-left: 4px solid green;">
 		<h4 align="center">Informations personnels</h4>
 		<form style="padding: 15px; width: 95%;" class="form-horizontal"
-			method="post" action="${pageContext.request.contextPath}/index/modifClient" modelAttribute="client">
+			method="POST" action="${pageContext.request.contextPath}/index/modifier/" modelAttribute="client">
+			
 			<div class="form-group">
 				<label for="nom">Nom :</label> <input type="text"
 					class="form-control" id="nom" name="nom" value="${clientS.nom}">
