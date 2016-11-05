@@ -80,6 +80,16 @@ public class CommandeDaoImpl implements ICommandeDao {
 		
 		return querySql.list();
 	}
+	
+	public Commande getCommandeByIdDao(long id_commande) {
+		Session s = sf.getCurrentSession();
+		String req ="FROM Commande p WHERE p.id_commande=:commande_id";
+		Query query = s.createQuery(req);
+		
+		query.setParameter("commande_id", id_commande);
+		
+		return (Commande) query.uniqueResult();
+	}
 
 //----------------------------------------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------------------

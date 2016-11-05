@@ -139,7 +139,7 @@ tr:nth-child(even) {
 					<td>${commandClient.id_commande}</td>
 					<td>${commandClient.date_commande}</td>
 					<td>
-						<form action="${pageContext.request.contextPath}/gestionnaire/gestCommandClient/${commandClient.id_commande}" method="get">							
+						<form action="${pageContext.request.contextPath}/gestionnaire/gestLignesCommand/${commandClient.id_commande}" method="get">							
 								<button type="submit" class="btn btn-primary">Lignes de commande</button>							
 						</form>						
 					</td>

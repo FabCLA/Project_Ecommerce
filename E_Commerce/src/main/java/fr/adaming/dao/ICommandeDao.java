@@ -36,5 +36,6 @@ public interface ICommandeDao {
 	public void deleteComandeDao(long id_cmd);
 	public List<Commande> getCommandesByClientDao(Client client);
 	public List<Commande> getCommandesByIdClientDao(long id_client);
+	public Commande getCommandeByIdDao(long id_commande);
 //-------------------------------------------------------------------------------------------------------------
 }

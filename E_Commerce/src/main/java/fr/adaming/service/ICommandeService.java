@@ -35,6 +35,7 @@ public interface ICommandeService {
 		public void deleteComandeService(long id_cmd);
 		public List<Commande> getCommandesByClientService(Client client);
 		public List<Commande> getCommandesByIdClientService(long id_client);
+		public Commande getCommandeByIdService(long id_commande);
 	//-------------------------------------------------------------------------------------------------------------
 
 }

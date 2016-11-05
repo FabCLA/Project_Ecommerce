@@ -69,8 +69,8 @@ public class LigneCommandeServiceImpl implements ILigneCommandeService{
 	}
 
 	@Override
-	public List<LigneCommande> getLigneCByIdCommandeService(long id_commande) {
-		return ligneCDao.getLigneCByIdCommandeDao(id_commande);
+	public List<LigneCommande> getLigneCByIdPanierService(long id_panier) {
+		return ligneCDao.getLigneCByIdPanierDao(id_panier);
 	}
 
 	//----------------------------------------------------------------------------------------------------------------

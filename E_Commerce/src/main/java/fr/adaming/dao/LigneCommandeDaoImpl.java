@@ -96,15 +96,15 @@ public class LigneCommandeDaoImpl implements ILigneCommandeDao {
 	
 	
 	@Override
-	public List<LigneCommande> getLigneCByIdCommandeDao(long id_commande) {
+	public List<LigneCommande> getLigneCByIdPanierDao(long id_panier) {
 		
 		Session s = sf.getCurrentSession();
 		
-		String reqSql="SELECT * FROM lignecommande WHERE commande_id=?";
+		String reqSql="SELECT * FROM lignecommande WHERE panier_id=?";
 		SQLQuery querySql=s.createSQLQuery(reqSql);
 		querySql.addEntity(LigneCommande.class);
 		
-		querySql.setParameter(0, id_commande);
+		querySql.setParameter(0, id_panier);
 		
 		return querySql.list();
 	

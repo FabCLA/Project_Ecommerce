@@ -8,6 +8,8 @@ package fr.adaming.service;
 
 import java.util.List;
 
+import org.hibernate.Query;
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -55,6 +57,10 @@ public class CommandeServiceImpl implements ICommandeService{
 	
 	public List<Commande> getCommandesByIdClientService(long id_client){
 		return cmdDao.getCommandesByIdClientDao(id_client);
+	}
+	
+	public Commande getCommandeByIdService(long id_commande) {				
+		return cmdDao.getCommandeByIdDao(id_commande);
 	}
 //----------------------------------------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------------------

@@ -192,8 +192,11 @@ public class GestionnaireController {
 
 		@RequestMapping(value = "/gestLignesCommand/{CommandeID}", method = RequestMethod.GET)
 		public String lignesCommand(@PathVariable("CommandeID") long id_commande, ModelMap model) {
-						
-			List<LigneCommande> liste = ligneCommandeService.getLigneCByIdCommandeService(id_commande);
+			
+			Commande cmd=commandeService.getCommandeByIdService(id_commande);
+			long id_panier=cmd.getPanier().getId_panier();
+			
+			List<LigneCommande> liste = ligneCommandeService.getLigneCByIdPanierService(id_panier);
 			model.addAttribute("listeLignesCommand", liste);
 			
 			return "g_lignesByCommande";

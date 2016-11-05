@@ -121,6 +121,7 @@ tr:nth-child(even) {
 	</ul>
 
 	<ul class="horiz1">
+		<li class="horiz1"><a href="${pageContext.request.contextPath}/gestionnaire/formDelClientGest"Supprimer></a></li>
 	</ul>
 
 	<div>
@@ -129,15 +130,19 @@ tr:nth-child(even) {
 
 			<tr bgcolor="grey" style="color: white">
 				<th>Id</th>
+				<th>Produit</th>
+				<th>Prix unitaire</th>
 				<th>Quantité</th>
 				<th>Prix</th>
 			</tr>
 
-			<c:forEach var="commandClient" items="${listeLignesCommand}">
+			<c:forEach var="lignesCommand" items="${listeLignesCommand}">
 				<tr>
-					<td>${listeLignesCommand.id_LC}</td>
-					<td>${listeLignesCommand.quantite}</td>
-					<td>${listeLignesCommand.prix}</td>						
+					<td>${lignesCommand.id_LC}</td>
+					<td>${lignesCommand.produit.nom}</td>
+					<td>${lignesCommand.produit.prix}</td>
+					<td>${lignesCommand.quantite}</td>
+					<td>${lignesCommand.prix}</td>						
 				</tr>
 			</c:forEach>
 			
